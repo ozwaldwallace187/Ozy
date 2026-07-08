@@ -353,18 +353,25 @@
     </fieldset>
 
     <fieldset>
-      <legend>Currency conversion</legend>
-      <div class="row2">
-        <div>
-          <label for="fxRate">€1 EUR =</label>
-          <input type="number" id="fxRate" step="0.0001" value="0.8573">
+      <legend>Currency</legend>
+      <label for="currency">Bill this invoice in</label>
+      <select id="currency">
+        <option value="GBP">GBP (£) — no conversion</option>
+        <option value="EUR">EUR (€) — converts to GBP</option>
+      </select>
+      <div id="fxFields">
+        <div class="row2">
+          <div>
+            <label for="fxRate">€1 EUR =</label>
+            <input type="number" id="fxRate" step="0.0001" value="0.8573">
+          </div>
+          <div>
+            <label for="fxDate">Rate date</label>
+            <input type="date" id="fxDate">
+          </div>
         </div>
-        <div>
-          <label for="fxDate">Rate date</label>
-          <input type="date" id="fxDate">
-        </div>
+        <div class="hint">Items are entered in EUR; grand total converts to GBP using this rate.</div>
       </div>
-      <div class="hint">Items are entered in EUR; grand total converts to GBP using this rate.</div>
     </fieldset>
 
     <fieldset>
@@ -459,12 +466,12 @@ United Kingdom</textarea>
 
       <table class="p-items">
         <thead>
-          <tr><th>Items</th><th class="amt">Amount (EUR)</th></tr>
+          <tr><th>Items</th><th class="amt">Amount (<span id="pvCurrencyLabel">EUR</span>)</th></tr>
         </thead>
         <tbody id="pvItemsBody"></tbody>
       </table>
       <div class="p-footer-row">
-        <div>CONVERSION €1 EUR = <span id="pvFxRate"></span> GBP <span id="pvFxDate"></span></div>
+        <div id="pvConversionLine">CONVERSION €1 EUR = <span id="pvFxRate"></span> GBP <span id="pvFxDate"></span></div>
         <div>GRAND TOTAL £<span id="pvGrandTotal"></span></div>
       </div>
 
@@ -528,6 +535,7 @@ United Kingdom</textarea>
     clientAddress: "",
     sowLabel: "EXTRAS",
     items: [{ package: "Silhouette", custom: "", amount: "" }],
+    currency: "GBP",
     fxRate: 0.8573,
     fxDate: todayISO(),
     bizLogo: "Babette",
@@ -572,6 +580,8 @@ United Kingdom</textarea>
   const clientAddressInput = el("clientAddress");
   const sowLabelInput = el("sowLabel");
   const itemsContainer = el("itemsContainer");
+  const currencyInput = el("currency");
+  const fxFields = el("fxFields");
   const fxRateInput = el("fxRate");
   const fxDateInput = el("fxDate");
   const bizLogoInput = el("bizLogo");
@@ -594,6 +604,8 @@ United Kingdom</textarea>
     clientNameInput.value = state.clientName;
     clientAddressInput.value = state.clientAddress;
     sowLabelInput.value = state.sowLabel;
+    currencyInput.value = state.currency;
+    fxFields.style.display = state.currency === "EUR" ? "" : "none";
     fxRateInput.value = state.fxRate;
     fxDateInput.value = state.fxDate;
     bizLogoInput.value = state.bizLogo;
@@ -666,7 +678,7 @@ United Kingdom</textarea>
       }
 
       const amountLabel = document.createElement("label");
-      amountLabel.textContent = "Amount (EUR)";
+      amountLabel.textContent = "Amount (" + state.currency + ")";
       const amountInput = document.createElement("input");
       amountInput.type = "number";
       amountInput.step = "0.01";
@@ -702,6 +714,10 @@ United Kingdom</textarea>
     el("pvIban").textContent = state.iban;
     el("pvSwift").textContent = state.swift;
 
+    const isEUR = state.currency === "EUR";
+    const itemSymbol = isEUR ? "€" : "£";
+    el("pvCurrencyLabel").textContent = state.currency;
+
     const tbody = el("pvItemsBody");
     tbody.innerHTML = "";
     let subtotal = 0;
@@ -714,7 +730,7 @@ United Kingdom</textarea>
       tdDesc.textContent = desc.toUpperCase();
       const tdAmt = document.createElement("td");
       tdAmt.className = "amt";
-      tdAmt.textContent = item.amount !== "" ? "€" + money(amt) : "";
+      tdAmt.textContent = item.amount !== "" ? itemSymbol + money(amt) : "";
       tr.appendChild(tdDesc);
       tr.appendChild(tdAmt);
       tbody.appendChild(tr);
@@ -726,9 +742,16 @@ United Kingdom</textarea>
       tbody.appendChild(tr);
     }
 
-    el("pvFxRate").textContent = state.fxRate;
-    el("pvFxDate").textContent = formatDateShort(state.fxDate);
-    el("pvGrandTotal").textContent = money(subtotal * (Number(state.fxRate) || 0));
+    const conversionLine = el("pvConversionLine");
+    if (isEUR) {
+      conversionLine.style.visibility = "visible";
+      el("pvFxRate").textContent = state.fxRate;
+      el("pvFxDate").textContent = formatDateShort(state.fxDate);
+      el("pvGrandTotal").textContent = money(subtotal * (Number(state.fxRate) || 0));
+    } else {
+      conversionLine.style.visibility = "hidden";
+      el("pvGrandTotal").textContent = money(subtotal);
+    }
 
     el("pvTerms").textContent = state.termsText;
     el("pvSig").textContent = state.sigText;
@@ -762,6 +785,12 @@ United Kingdom</textarea>
   clientNameInput.addEventListener("input", () => { state.clientName = clientNameInput.value; updatePreview(); });
   clientAddressInput.addEventListener("input", () => { state.clientAddress = clientAddressInput.value; updatePreview(); });
   sowLabelInput.addEventListener("input", () => { state.sowLabel = sowLabelInput.value; updatePreview(); });
+  currencyInput.addEventListener("change", () => {
+    state.currency = currencyInput.value;
+    fxFields.style.display = state.currency === "EUR" ? "" : "none";
+    renderItemRows();
+    updatePreview();
+  });
   fxRateInput.addEventListener("input", () => { state.fxRate = fxRateInput.value; updatePreview(); });
   fxDateInput.addEventListener("input", () => { state.fxDate = fxDateInput.value; updatePreview(); });
   bizLogoInput.addEventListener("input", () => { state.bizLogo = bizLogoInput.value; updatePreview(); });
