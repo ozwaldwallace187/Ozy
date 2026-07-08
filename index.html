@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Babette Invoice Builder</title>
+<style>
+  :root {
+    --cream: #ece6d8;
+    --ink: #1a1a1a;
+    --line: #1a1a1a;
+    --muted: #6b6558;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f4f2ee;
+    color: var(--ink);
+  }
+  .app {
+    display: flex;
+    min-height: 100vh;
+  }
+  .form-panel {
+    width: 420px;
+    flex-shrink: 0;
+    background: #fff;
+    border-right: 1px solid #ddd;
+    padding: 24px;
+    overflow-y: auto;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+  .form-panel h1 {
+    font-size: 18px;
+    margin: 0 0 4px;
+  }
+  .form-panel .sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  fieldset {
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 12px 14px 16px;
+  }
+  legend {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    padding: 0 6px;
+  }
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #444;
+    margin: 10px 0 3px;
+  }
+  label:first-child { margin-top: 0; }
+  input[type="text"], input[type="number"], input[type="date"], textarea, select {
+    width: 100%;
+    padding: 7px 8px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+    background: #fff;
+  }
+  textarea { resize: vertical; min-height: 50px; }
+  .row2 { display: flex; gap: 8px; }
+  .row2 > div { flex: 1; }
+  .item-row {
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 8px;
+    position: relative;
+    background: #fafaf8;
+  }
+  .item-row .remove-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: none;
+    border: none;
+    color: #b33;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px 6px;
+  }
+  button {
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn {
+    display: inline-block;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: #fff;
+    margin-right: 8px;
+    margin-top: 4px;
+  }
+  .btn.secondary {
+    background: #fff;
+    color: var(--ink);
+  }
+  .btn.small {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .actions {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #eee;
+  }
+  .hint {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* ---------- PREVIEW / INVOICE ---------- */
+  .preview-wrap {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 32px;
+    overflow: auto;
+    background: #e9e7e2;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: var(--cream);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    padding: 14mm 16mm;
+    font-family: "Courier New", Courier, monospace;
+    color: var(--ink);
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  .p-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14mm;
+  }
+  .p-logo {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 900;
+    font-size: 46px;
+    letter-spacing: 1px;
+    line-height: 0.85;
+    text-transform: uppercase;
+  }
+  .p-logo .email {
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+  }
+  .p-invoice-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 900;
+    font-size: 34px;
+    text-transform: uppercase;
+  }
+  .p-meta-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .p-meta-left, .p-meta-right {
+    line-height: 1.6;
+  }
+  .p-meta-right { text-align: right; }
+  .p-two-col {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    gap: 20px;
+  }
+  .p-two-col > div { flex: 1; }
+  .p-two-col .right { text-align: right; }
+  .p-label {
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: underline;
+    margin-bottom: 4px;
+    display: inline-block;
+  }
+  .p-two-col .right .p-label { }
+  .p-block-title {
+    text-align: center;
+    border: 1px solid var(--line);
+    padding: 10px 0;
+    margin-bottom: 14px;
+  }
+  .p-block-title .sow {
+    text-decoration: underline;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .p-block-title .extras {
+    margin-top: 6px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  table.p-items {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--line);
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  table.p-items th {
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
+  }
+  table.p-items td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #cfc9ba;
+    font-size: 12px;
+    height: 30px;
+    vertical-align: top;
+  }
+  table.p-items td.amt { text-align: right; white-space: nowrap; }
+  .p-footer-row {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid var(--line);
+    border-top: none;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  .p-spacer { flex: 1; }
+  .p-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: auto;
+  }
+  .p-terms {
+    max-width: 60%;
+  }
+  .p-terms .p-label { text-decoration: none; }
+  .p-terms p {
+    font-size: 10px;
+    line-height: 1.5;
+    color: #333;
+    margin: 6px 0 0;
+  }
+  .p-sig {
+    font-family: "Brush Script MT", cursive;
+    font-size: 34px;
+    color: #444;
+    transform: rotate(-4deg);
+  }
+
+  @media print {
+    body { background: #fff; }
+    .form-panel, .toolbar { display: none !important; }
+    .preview-wrap { padding: 0; background: #fff; }
+    .page {
+      box-shadow: none;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0;
+    }
+    @page { size: A4; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="form-panel">
+    <h1>Babette Invoice Builder</h1>
+    <div class="sub">Fill in client details, add line items, then print / save as PDF.</div>
+
+    <fieldset>
+      <legend>Invoice</legend>
+      <div class="row2">
+        <div>
+          <label for="invoiceNumber">Invoice number</label>
+          <input type="text" id="invoiceNumber">
+        </div>
+      </div>
+      <div class="row2">
+        <div>
+          <label for="dateSent">Date sent</label>
+          <input type="date" id="dateSent">
+        </div>
+        <div>
+          <label for="dueDate">Due date</label>
+          <input type="date" id="dueDate">
+        </div>
+      </div>
+      <label for="dueDays">Auto due-date offset (days from sent date)</label>
+      <input type="number" id="dueDays" value="7" min="0">
+    </fieldset>
+
+    <fieldset>
+      <legend>Bill To (client)</legend>
+      <label for="clientName">Client name</label>
+      <input type="text" id="clientName" placeholder="e.g. Angus Mclane">
+      <label for="clientAddress">Billing address (one line each)</label>
+      <textarea id="clientAddress" placeholder="20A Seniac Road&#10;Toronto, M4N 2K9&#10;Ontario&#10;Canada"></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>Line items</legend>
+      <div id="itemsContainer"></div>
+      <button class="btn small secondary" id="addItemBtn" type="button">+ Add item</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Currency conversion</legend>
+      <div class="row2">
+        <div>
+          <label for="fxRate">€1 EUR =</label>
+          <input type="number" id="fxRate" step="0.0001" value="0.8573">
+        </div>
+        <div>
+          <label for="fxDate">Rate date</label>
+          <input type="date" id="fxDate">
+        </div>
+      </div>
+      <div class="hint">Items are entered in EUR; grand total converts to GBP using this rate.</div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Business details</legend>
+      <label for="bizLogo">Logo text</label>
+      <input type="text" id="bizLogo" value="Babette">
+      <label for="bizEmail">Email</label>
+      <input type="text" id="bizEmail" value="sarah@haveyoumetbabette.com">
+      <label for="bizAddress">Business address (one line each)</label>
+      <textarea id="bizAddress">Ground floor flat, 79 Marina
+St Leonards on Sea
+TN38 0BJ
+United Kingdom</textarea>
+      <label for="bizPhone">Phone</label>
+      <input type="text" id="bizPhone" value="+44 7944 896900">
+      <label for="sigText">Signature text</label>
+      <input type="text" id="sigText" value="SO">
+    </fieldset>
+
+    <fieldset>
+      <legend>Payment method</legend>
+      <label for="payName">Account name</label>
+      <input type="text" id="payName" value="Sarah Owen">
+      <label for="accountNumber">Account number</label>
+      <input type="text" id="accountNumber" value="93753441">
+      <div class="row2">
+        <div>
+          <label for="sortCode">Sort code</label>
+          <input type="text" id="sortCode" value="20-25-97">
+        </div>
+        <div>
+          <label for="swift">SWIFT</label>
+          <input type="text" id="swift" value="BUKBGB22">
+        </div>
+      </div>
+      <label for="iban">IBAN</label>
+      <input type="text" id="iban" value="GB08BUKB20259793753441">
+    </fieldset>
+
+    <fieldset>
+      <legend>Terms &amp; conditions</legend>
+      <textarea id="termsText" style="min-height:90px;">This invoice relates solely to the goods and services listed above. Any additional work requested outside of the agreed scope will be quoted separately. Bookings are confirmed only once payment has been received. Deposits are non-refundable unless otherwise stated in the written agreement.</textarea>
+    </fieldset>
+
+    <div class="actions">
+      <button class="btn" id="printBtn" type="button">Print / Save as PDF</button>
+      <button class="btn secondary" id="newInvoiceBtn" type="button">New invoice (next client)</button>
+      <div class="hint">"New invoice" clears the client + line items, bumps the invoice number, and resets the dates. Business details, bank info and terms stay as you've set them.</div>
+    </div>
+  </div>
+
+  <div class="preview-wrap">
+    <div class="page" id="previewPage">
+      <div class="p-header">
+        <div class="p-logo">
+          <div id="pvLogo">Babette</div>
+          <div class="email" id="pvEmail">sarah@haveyoumetbabette.com</div>
+        </div>
+        <div class="p-invoice-title">Invoice</div>
+      </div>
+
+      <div class="p-meta-row">
+        <div class="p-meta-left">
+          <div>INVOICE NUMBER: <span id="pvInvoiceNumber">#BAB0011</span></div>
+          <div>DATE: <span id="pvDateSent">—</span></div>
+          <div>DUE DATE: <span id="pvDueDate">—</span></div>
+        </div>
+        <div class="p-meta-right" id="pvBizAddress"></div>
+      </div>
+
+      <div class="p-two-col">
+        <div>
+          <span class="p-label">Bill To:</span>
+          <div id="pvClient" style="line-height:1.6; margin-top:4px;"></div>
+        </div>
+        <div class="right">
+          <span class="p-label">Payment Method</span>
+          <div style="line-height:1.6; margin-top:4px;">
+            <div id="pvPayName"></div>
+            <div>Account number: <span id="pvAccountNumber"></span></div>
+            <div>Sort code: <span id="pvSortCode"></span></div>
+            <div>IBAN: <span id="pvIban"></span></div>
+            <div>SWIFT: <span id="pvSwift"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-block-title">
+        <div class="sow">Statement of Works</div>
+        <div class="extras">EXTRAS</div>
+      </div>
+
+      <table class="p-items">
+        <thead>
+          <tr><th>Items</th><th class="amt">Amount (EUR)</th></tr>
+        </thead>
+        <tbody id="pvItemsBody"></tbody>
+      </table>
+      <div class="p-footer-row">
+        <div>CONVERSION €1 EUR = <span id="pvFxRate"></span> GBP <span id="pvFxDate"></span></div>
+        <div>GRAND TOTAL £<span id="pvGrandTotal"></span></div>
+      </div>
+
+      <div class="p-spacer"></div>
+
+      <div class="p-bottom">
+        <div class="p-terms">
+          <span class="p-label">Terms &amp; Condition</span>
+          <p id="pvTerms"></p>
+        </div>
+        <div class="p-sig" id="pvSig">SO</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  const PACKAGES = ["Silhouette", "Pirouette", "Pirouette + Sourcing", "Fleurette", "Rosette", "Antoinette", "Extras", "Custom"];
+  const STORAGE_KEY = "babette_invoice_builder_v1";
+
+  function todayISO() {
+    const d = new Date();
+    return d.toISOString().slice(0, 10);
+  }
+  function addDaysISO(iso, days) {
+    const d = new Date(iso + "T00:00:00");
+    d.setDate(d.getDate() + Number(days || 0));
+    return d.toISOString().slice(0, 10);
+  }
+  function formatDateHuman(iso) {
+    if (!iso) return "—";
+    const d = new Date(iso + "T00:00:00");
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    return `${months[d.getMonth()]} ${String(d.getDate()).padStart(2,"0")}, ${d.getFullYear()}`;
+  }
+  function formatDateShort(iso) {
+    if (!iso) return "";
+    const d = new Date(iso + "T00:00:00");
+    return `${String(d.getDate()).padStart(2,"0")}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getFullYear()).slice(2)}`;
+  }
+  function money(n) {
+    return (Math.round((Number(n) || 0) * 100) / 100).toFixed(2);
+  }
+
+  let state = {
+    invoiceNumber: "BAB0011",
+    nextSeq: 11,
+    dateSent: todayISO(),
+    dueDate: addDaysISO(todayISO(), 7),
+    dueDays: 7,
+    clientName: "",
+    clientAddress: "",
+    items: [{ package: "Silhouette", custom: "", amount: "" }],
+    fxRate: 0.8573,
+    fxDate: todayISO(),
+    bizLogo: "Babette",
+    bizEmail: "sarah@haveyoumetbabette.com",
+    bizAddress: "Ground floor flat, 79 Marina\nSt Leonards on Sea\nTN38 0BJ\nUnited Kingdom",
+    bizPhone: "+44 7944 896900",
+    sigText: "SO",
+    payName: "Sarah Owen",
+    accountNumber: "93753441",
+    sortCode: "20-25-97",
+    swift: "BUKBGB22",
+    iban: "GB08BUKB20259793753441",
+    termsText: "This invoice relates solely to the goods and services listed above. Any additional work requested outside of the agreed scope will be quoted separately. Bookings are confirmed only once payment has been received. Deposits are non-refundable unless otherwise stated in the written agreement."
+  };
+
+  function loadPersisted() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      // Only persist business-level settings + running invoice sequence, not client-specific fields.
+      const keep = ["nextSeq","fxRate","bizLogo","bizEmail","bizAddress","bizPhone","sigText",
+                    "payName","accountNumber","sortCode","swift","iban","termsText","dueDays"];
+      keep.forEach(k => { if (saved[k] !== undefined) state[k] = saved[k]; });
+      state.invoiceNumber = "BAB" + String(state.nextSeq).padStart(4, "0");
+    } catch (e) { /* ignore corrupt storage */ }
+  }
+  function persist() {
+    const keep = ["nextSeq","fxRate","bizLogo","bizEmail","bizAddress","bizPhone","sigText",
+                  "payName","accountNumber","sortCode","swift","iban","termsText","dueDays"];
+    const toSave = {};
+    keep.forEach(k => toSave[k] = state[k]);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+  }
+
+  // ---------- DOM refs ----------
+  const el = id => document.getElementById(id);
+  const invoiceNumberInput = el("invoiceNumber");
+  const dateSentInput = el("dateSent");
+  const dueDateInput = el("dueDate");
+  const dueDaysInput = el("dueDays");
+  const clientNameInput = el("clientName");
+  const clientAddressInput = el("clientAddress");
+  const itemsContainer = el("itemsContainer");
+  const fxRateInput = el("fxRate");
+  const fxDateInput = el("fxDate");
+  const bizLogoInput = el("bizLogo");
+  const bizEmailInput = el("bizEmail");
+  const bizAddressInput = el("bizAddress");
+  const bizPhoneInput = el("bizPhone");
+  const sigTextInput = el("sigText");
+  const payNameInput = el("payName");
+  const accountNumberInput = el("accountNumber");
+  const sortCodeInput = el("sortCode");
+  const swiftInput = el("swift");
+  const ibanInput = el("iban");
+  const termsTextInput = el("termsText");
+
+  function syncFormFromState() {
+    invoiceNumberInput.value = state.invoiceNumber;
+    dateSentInput.value = state.dateSent;
+    dueDateInput.value = state.dueDate;
+    dueDaysInput.value = state.dueDays;
+    clientNameInput.value = state.clientName;
+    clientAddressInput.value = state.clientAddress;
+    fxRateInput.value = state.fxRate;
+    fxDateInput.value = state.fxDate;
+    bizLogoInput.value = state.bizLogo;
+    bizEmailInput.value = state.bizEmail;
+    bizAddressInput.value = state.bizAddress;
+    bizPhoneInput.value = state.bizPhone;
+    sigTextInput.value = state.sigText;
+    payNameInput.value = state.payName;
+    accountNumberInput.value = state.accountNumber;
+    sortCodeInput.value = state.sortCode;
+    swiftInput.value = state.swift;
+    ibanInput.value = state.iban;
+    termsTextInput.value = state.termsText;
+    renderItemRows();
+  }
+
+  function renderItemRows() {
+    itemsContainer.innerHTML = "";
+    state.items.forEach((item, idx) => {
+      const row = document.createElement("div");
+      row.className = "item-row";
+
+      const removeBtn = document.createElement("button");
+      removeBtn.className = "remove-btn";
+      removeBtn.type = "button";
+      removeBtn.textContent = "✕";
+      removeBtn.title = "Remove item";
+      removeBtn.addEventListener("click", () => {
+        state.items.splice(idx, 1);
+        if (state.items.length === 0) state.items.push({ package: "Silhouette", custom: "", amount: "" });
+        renderItemRows();
+        updatePreview();
+      });
+
+      const label = document.createElement("label");
+      label.textContent = "Package";
+      label.style.marginTop = "0";
+
+      const select = document.createElement("select");
+      PACKAGES.forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p;
+        opt.textContent = p;
+        if (p === item.package) opt.selected = true;
+        select.appendChild(opt);
+      });
+      select.addEventListener("change", () => {
+        item.package = select.value;
+        renderItemRows();
+        updatePreview();
+      });
+
+      row.appendChild(removeBtn);
+      row.appendChild(label);
+      row.appendChild(select);
+
+      if (item.package === "Custom") {
+        const customLabel = document.createElement("label");
+        customLabel.textContent = "Custom description";
+        const customInput = document.createElement("input");
+        customInput.type = "text";
+        customInput.value = item.custom || "";
+        customInput.placeholder = "e.g. Bespoke floral install";
+        customInput.addEventListener("input", () => {
+          item.custom = customInput.value;
+          updatePreview();
+        });
+        row.appendChild(customLabel);
+        row.appendChild(customInput);
+      }
+
+      const amountLabel = document.createElement("label");
+      amountLabel.textContent = "Amount (EUR)";
+      const amountInput = document.createElement("input");
+      amountInput.type = "number";
+      amountInput.step = "0.01";
+      amountInput.value = item.amount;
+      amountInput.addEventListener("input", () => {
+        item.amount = amountInput.value;
+        updatePreview();
+      });
+      row.appendChild(amountLabel);
+      row.appendChild(amountInput);
+
+      itemsContainer.appendChild(row);
+    });
+  }
+
+  function updatePreview() {
+    el("pvLogo").textContent = state.bizLogo;
+    el("pvEmail").textContent = state.bizEmail.toUpperCase();
+    el("pvInvoiceNumber").textContent = "#" + state.invoiceNumber;
+    el("pvDateSent").textContent = formatDateHuman(state.dateSent).toUpperCase();
+    el("pvDueDate").textContent = formatDateHuman(state.dueDate).toUpperCase();
+
+    const addrLines = state.bizAddress.split("\n").filter(Boolean);
+    el("pvBizAddress").innerHTML = addrLines.map(l => l.toUpperCase()).join("<br>") +
+      (state.bizPhone ? "<br>" + state.bizPhone : "");
+
+    const clientLines = [state.clientName, ...state.clientAddress.split("\n")].filter(Boolean);
+    el("pvClient").innerHTML = clientLines.map(l => l.toUpperCase()).join("<br>");
+
+    el("pvPayName").textContent = state.payName;
+    el("pvAccountNumber").textContent = state.accountNumber;
+    el("pvSortCode").textContent = state.sortCode;
+    el("pvIban").textContent = state.iban;
+    el("pvSwift").textContent = state.swift;
+
+    const tbody = el("pvItemsBody");
+    tbody.innerHTML = "";
+    let subtotal = 0;
+    state.items.forEach(item => {
+      const desc = item.package === "Custom" ? (item.custom || "Custom") : item.package;
+      const amt = Number(item.amount) || 0;
+      subtotal += amt;
+      const tr = document.createElement("tr");
+      const tdDesc = document.createElement("td");
+      tdDesc.textContent = desc.toUpperCase();
+      const tdAmt = document.createElement("td");
+      tdAmt.className = "amt";
+      tdAmt.textContent = item.amount !== "" ? "€" + money(amt) : "";
+      tr.appendChild(tdDesc);
+      tr.appendChild(tdAmt);
+      tbody.appendChild(tr);
+    });
+    // pad with a couple of blank rows to echo the original template's look
+    for (let i = state.items.length; i < Math.max(3, state.items.length); i++) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = "<td>&nbsp;</td><td class='amt'></td>";
+      tbody.appendChild(tr);
+    }
+
+    el("pvFxRate").textContent = state.fxRate;
+    el("pvFxDate").textContent = formatDateShort(state.fxDate);
+    el("pvGrandTotal").textContent = money(subtotal * (Number(state.fxRate) || 0));
+
+    el("pvTerms").textContent = state.termsText;
+    el("pvSig").textContent = state.sigText;
+  }
+
+  // ---------- Event wiring ----------
+  invoiceNumberInput.addEventListener("input", () => { state.invoiceNumber = invoiceNumberInput.value; updatePreview(); });
+  dateSentInput.addEventListener("input", () => {
+    state.dateSent = dateSentInput.value;
+    state.dueDate = addDaysISO(state.dateSent, state.dueDays);
+    dueDateInput.value = state.dueDate;
+    updatePreview();
+  });
+  dueDateInput.addEventListener("input", () => { state.dueDate = dueDateInput.value; updatePreview(); });
+  dueDaysInput.addEventListener("input", () => {
+    state.dueDays = Number(dueDaysInput.value) || 0;
+    state.dueDate = addDaysISO(state.dateSent, state.dueDays);
+    dueDateInput.value = state.dueDate;
+    persist();
+    updatePreview();
+  });
+  clientNameInput.addEventListener("input", () => { state.clientName = clientNameInput.value; updatePreview(); });
+  clientAddressInput.addEventListener("input", () => { state.clientAddress = clientAddressInput.value; updatePreview(); });
+  fxRateInput.addEventListener("input", () => { state.fxRate = fxRateInput.value; persist(); updatePreview(); });
+  fxDateInput.addEventListener("input", () => { state.fxDate = fxDateInput.value; updatePreview(); });
+  bizLogoInput.addEventListener("input", () => { state.bizLogo = bizLogoInput.value; persist(); updatePreview(); });
+  bizEmailInput.addEventListener("input", () => { state.bizEmail = bizEmailInput.value; persist(); updatePreview(); });
+  bizAddressInput.addEventListener("input", () => { state.bizAddress = bizAddressInput.value; persist(); updatePreview(); });
+  bizPhoneInput.addEventListener("input", () => { state.bizPhone = bizPhoneInput.value; persist(); updatePreview(); });
+  sigTextInput.addEventListener("input", () => { state.sigText = sigTextInput.value; persist(); updatePreview(); });
+  payNameInput.addEventListener("input", () => { state.payName = payNameInput.value; persist(); updatePreview(); });
+  accountNumberInput.addEventListener("input", () => { state.accountNumber = accountNumberInput.value; persist(); updatePreview(); });
+  sortCodeInput.addEventListener("input", () => { state.sortCode = sortCodeInput.value; persist(); updatePreview(); });
+  swiftInput.addEventListener("input", () => { state.swift = swiftInput.value; persist(); updatePreview(); });
+  ibanInput.addEventListener("input", () => { state.iban = ibanInput.value; persist(); updatePreview(); });
+  termsTextInput.addEventListener("input", () => { state.termsText = termsTextInput.value; persist(); updatePreview(); });
+
+  el("addItemBtn").addEventListener("click", () => {
+    state.items.push({ package: "Silhouette", custom: "", amount: "" });
+    renderItemRows();
+    updatePreview();
+  });
+
+  el("printBtn").addEventListener("click", () => window.print());
+
+  el("newInvoiceBtn").addEventListener("click", () => {
+    state.nextSeq += 1;
+    state.invoiceNumber = "BAB" + String(state.nextSeq).padStart(4, "0");
+    state.dateSent = todayISO();
+    state.dueDate = addDaysISO(state.dateSent, state.dueDays);
+    state.fxDate = todayISO();
+    state.clientName = "";
+    state.clientAddress = "";
+    state.items = [{ package: "Silhouette", custom: "", amount: "" }];
+    persist();
+    syncFormFromState();
+    updatePreview();
+  });
+
+  // ---------- Init ----------
+  loadPersisted();
+  syncFormFromState();
+  updatePreview();
+})();
+</script>
+</body>
+</html>
