@@ -1,0 +1,119 @@
+{
+  "slug": "suppliers",
+  "number": "007",
+  "slateLabel": "THE ATELIER",
+  "title": "Work With Babette — Supplier Intake",
+  "metaDescription": "Chefs, florists, makers, musicians — introduce yourself to Babette.",
+  "heading": ["JOIN", "THE", "ATELIER"],
+  "headingAccent": 2,
+  "intro": "Chefs, florists, makers, musicians, borrowers and builders — we keep a small black book of people who do things properly. Introduce yourself.",
+  "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",
+  "cc": "sarah@haveyoumetbabette.com",
+  "subject": "Supplier intake — the atelier",
+  "fallbackEmail": "ozy@haveyoumetbabette.com",
+  "privacyUrl": "https://haveyoumetbabette.com/privacy",
+  "homeUrl": "https://haveyoumetbabette.com",
+  "submitLabel": "Introduce yourself",
+  "success": {
+    "message": "Noted in the black book. If a table calls for you, we’ll write.",
+    "sub": "HAVE YOU MET BABETTE?"
+  },
+  "steps": [
+    {
+      "marker": "WHO YOU ARE",
+      "fields": [
+        {
+          "kind": "text",
+          "name": "business",
+          "label": "Business name",
+          "required": true,
+          "error": "We’ll need a name for the book."
+        },
+        {
+          "kind": "text",
+          "name": "contact_name",
+          "label": "Your name",
+          "required": true,
+          "autocomplete": "name",
+          "error": "And the person behind it."
+        },
+        {
+          "kind": "email",
+          "name": "email",
+          "label": "Email",
+          "required": true,
+          "autocomplete": "email",
+          "error": "We’ll need an email to reply to you.",
+          "errorFormat": "That email doesn’t look quite right."
+        },
+        {
+          "kind": "text",
+          "name": "links",
+          "label": "Website or Instagram",
+          "required": true,
+          "placeholder": "@yourhandle or yoursite.com",
+          "error": "Show us your work — a handle or a site."
+        }
+      ]
+    },
+    {
+      "marker": "WHAT YOU DO",
+      "fields": [
+        {
+          "kind": "chips",
+          "name": "discipline",
+          "label": "Your discipline — tick all that apply",
+          "required": true,
+          "multiple": true,
+          "error": "Tick at least one.",
+          "options": [
+            { "value": "Food & Chef" },
+            { "value": "Florals" },
+            { "value": "Furniture & Tableware" },
+            { "value": "Wine & Bar" },
+            { "value": "Music & Performance" },
+            { "value": "Photography & Film" },
+            { "value": "Production & Crew" },
+            {
+              "value": "Something Else",
+              "reveal": {
+                "name": "discipline_detail",
+                "label": "Name your craft",
+                "placeholder": "Name your craft…"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "name": "speciality",
+          "label": "Cuisine or speciality, in a phrase",
+          "placeholder": "e.g. fire-cooked Basque, sculptural ikebana, vintage silverware"
+        },
+        {
+          "kind": "text",
+          "name": "territory",
+          "label": "Where you work",
+          "required": true,
+          "placeholder": "e.g. Aude & Occitanie, UK-wide, will travel",
+          "error": "Roughly where can we book you?"
+        },
+        {
+          "kind": "textarea",
+          "name": "notes",
+          "label": "Anything else we should know — the thing that makes you, you.",
+          "prompt": true,
+          "rows": 3
+        },
+        {
+          "kind": "check",
+          "name": "consent_contact",
+          "required": true,
+          "text": "You may keep my details on file and contact me about future work — see the {privacy}.",
+          "value": "Consented",
+          "error": "We can’t keep you in the book without your say-so."
+        }
+      ]
+    }
+  ]
+}

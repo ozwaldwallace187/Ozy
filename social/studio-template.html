@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Babette — Social Studio</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:,">
+<style id="export-fonts">
+/*__FONTS_CSS__*/
+</style>
+<style id="export-card">
+/*__CARD_CSS__*/
+</style>
+<style>
+  /* ---------- studio chrome (never exported) ---------- */
+  :root {
+    --ink: #000000; --paper: #FFFFFF; --splash: #E2261A;
+    --blush: #F6E1DE; --gold: #EDB421;
+  }
+  * { box-sizing: border-box; border-radius: 0 !important; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 300; font-size: 14px;
+  }
+  .st-slate {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin: 24px clamp(20px, 4vw, 40px) 0;
+    border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+    padding: 11px 0; font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em;
+  }
+  .st-slate .slash { color: var(--splash); }
+  .st-app {
+    display: grid; grid-template-columns: 360px 1fr;
+    gap: clamp(20px, 4vw, 48px); padding: clamp(20px, 4vw, 40px);
+    max-width: 1200px; margin: 0 auto; align-items: start;
+  }
+  @media (max-width: 860px) { .st-app { grid-template-columns: 1fr; } }
+  .st-h1 {
+    font-family: "Archivo Black", Impact, sans-serif; font-weight: 900;
+    text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.98;
+    font-size: 40px; margin: 0 0 6px;
+  }
+  .st-sub {
+    font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-weight: 500;
+    font-size: 17px; margin: 0 0 28px;
+  }
+  .st-label {
+    display: block; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.22em; margin: 22px 0 8px;
+  }
+  .st-input, .st-textarea {
+    width: 100%; border: none; border-bottom: 1px solid var(--ink);
+    background: transparent; padding: 7px 0 9px; font: inherit; font-size: 15px;
+  }
+  .st-textarea { resize: vertical; min-height: 64px; line-height: 1.45; }
+  .st-input:focus, .st-textarea:focus { outline: none; border-bottom-color: var(--splash); box-shadow: 0 1px 0 0 var(--splash); }
+  .st-seg { display: flex; flex-wrap: wrap; gap: 6px; }
+  .st-seg button {
+    font: inherit; font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em;
+    border: 1px solid var(--ink); background: var(--paper); color: var(--ink);
+    padding: 9px 12px; cursor: pointer;
+  }
+  .st-seg button:hover { background: var(--blush); }
+  .st-seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .st-seg button:focus-visible { outline: 2px solid var(--splash); outline-offset: 2px; }
+  .st-swatch { display: inline-block; width: 10px; height: 10px; margin-right: 7px; border: 1px solid currentColor; vertical-align: baseline; }
+  .st-download {
+    display: block; width: 100%; margin-top: 34px; padding: 15px;
+    font: inherit; font-size: 11px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.22em;
+    background: var(--ink); color: var(--paper); border: 1px solid var(--ink); cursor: pointer;
+  }
+  .st-download:hover { background: var(--splash); border-color: var(--splash); }
+  .st-download[disabled] { opacity: 0.5; cursor: default; }
+  .st-note { font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; opacity: 0.65; margin-top: 14px; line-height: 1.8; }
+  .st-stage { position: sticky; top: 24px; min-width: 0; }
+  .st-viewport { width: 100%; overflow: hidden; border: 1px solid var(--ink); background: #555; }
+  .st-scaler { transform-origin: top left; }
+  [data-modes] { display: none; }
+  [data-modes].is-on { display: block; }
+</style>
+</head>
+<body>
+<div class="st-slate">
+  <span>BABETTE</span>
+  <span><span class="slash">/</span>&nbsp; SOCIAL STUDIO &nbsp;<span class="slash">/</span></span>
+  <span>INTERNAL</span>
+</div>
+<div class="st-app">
+  <div class="st-controls">
+    <h1 class="st-h1">The<br>Studio</h1>
+    <p class="st-sub">Paste the words. Pick the world. Download the PNG. Nothing here rewrites a quote — ever.</p>
+
+    <span class="st-label">What are we making?</span>
+    <div class="st-seg" id="modeSeg" role="group" aria-label="Card mode">
+      <button type="button" data-mode="quote" aria-pressed="true">Quote</button>
+      <button type="button" data-mode="title" aria-pressed="false">Title card</button>
+      <button type="button" data-mode="closing" aria-pressed="false">Closing card</button>
+      <button type="button" data-mode="announce" aria-pressed="false">Announcement</button>
+    </div>
+
+    <span class="st-label">Ground</span>
+    <div class="st-seg" id="variantSeg" role="group" aria-label="Variant">
+      <button type="button" data-variant="paper" aria-pressed="true"><span class="st-swatch" style="background:#fff"></span>Paper</button>
+      <button type="button" data-variant="ink" aria-pressed="false"><span class="st-swatch" style="background:#000"></span>Ink</button>
+      <button type="button" data-variant="blush" aria-pressed="false"><span class="st-swatch" style="background:#F6E1DE"></span>Blush</button>
+      <button type="button" data-variant="gold" aria-pressed="false"><span class="st-swatch" style="background:#EDB421"></span>Gold rule</button>
+    </div>
+
+    <span class="st-label">Size</span>
+    <div class="st-seg" id="sizeSeg" role="group" aria-label="Size">
+      <button type="button" data-size="feed" aria-pressed="true">Feed 1080×1350</button>
+      <button type="button" data-size="story" aria-pressed="false">Story 1080×1920</button>
+      <button type="button" data-size="square" aria-pressed="false">Square 1080×1080</button>
+    </div>
+
+    <div data-modes="quote" class="is-on">
+      <label class="st-label" for="inQuote">The quote — their words, exactly</label>
+      <textarea class="st-textarea" id="inQuote">It felt like walking into a film someone had made about us.</textarea>
+    </div>
+
+    <div data-modes="title closing announce">
+      <label class="st-label" for="inHeading">Heading — one line per row, * for the red line</label>
+      <textarea class="st-textarea" id="inHeading">IN
+THEIR
+*WORDS</textarea>
+    </div>
+
+    <div data-modes="closing announce">
+      <label class="st-label" for="inSub">Supporting line (italic)</label>
+      <input class="st-input" id="inSub" value="">
+    </div>
+
+    <div data-modes="quote title">
+      <label class="st-label" for="inAttribution">Attribution — names, no dash</label>
+      <input class="st-input" id="inAttribution" value="HANNAH &amp; ANGUS">
+    </div>
+
+    <div data-modes="quote title">
+      <label class="st-label" for="inEvent">Event line (optional)</label>
+      <input class="st-input" id="inEvent" value="LA BELLE ÉCO — AUGUST 2026">
+    </div>
+
+    <div data-modes="quote title closing announce" class="is-on">
+      <label class="st-label" for="inKicker">Slate label</label>
+      <input class="st-input" id="inKicker" value="IN THEIR WORDS">
+    </div>
+
+    <div data-modes="quote" class="is-on">
+      <label class="st-label" for="inIndex">Slate index (optional, e.g. Nº 01)</label>
+      <input class="st-input" id="inIndex" value="">
+    </div>
+
+    <div data-modes="quote title closing announce" class="is-on">
+      <label class="st-label" for="inUrl">URL line (blank to hide)</label>
+      <input class="st-input" id="inUrl" value="HAVEYOUMETBABETTE.COM">
+    </div>
+
+    <button class="st-download" id="downloadBtn" type="button">Download PNG</button>
+    <p class="st-note">Batches &amp; carousels: `node social/render.js --set set.json`.<br>Export works best in Chrome.</p>
+  </div>
+
+  <div class="st-stage">
+    <div class="st-viewport" id="viewport">
+      <div class="st-scaler" id="scaler">
+<!--__CARD_MARKUP__-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/*__CARD_SCRIPT__*/
+</script>
+<script>
+(function () {
+  "use strict";
+  var state = { mode: "quote", variant: "paper", size: "feed" };
+  var SIZES = { feed: [1080, 1350], story: [1080, 1920], square: [1080, 1080] };
+
+  function seg(id, key, onChange) {
+    var box = document.getElementById(id);
+    box.addEventListener("click", function (e) {
+      var btn = e.target.closest("button");
+      if (!btn) return;
+      state[key] = btn.getAttribute("data-" + key);
+      box.querySelectorAll("button").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b === btn));
+      });
+      onChange();
+    });
+  }
+
+  function currentContent() {
+    var headingLines = document.getElementById("inHeading").value
+      .split("\n").map(function (s) { return s.trim(); }).filter(Boolean);
+    var showsNames = state.mode === "quote" || state.mode === "title";
+    return {
+      quote: state.mode === "quote" ? document.getElementById("inQuote").value : "",
+      heading: state.mode === "quote" ? [] : headingLines,
+      sub: document.getElementById("inSub").value,
+      attribution: showsNames ? document.getElementById("inAttribution").value : "",
+      event: showsNames ? document.getElementById("inEvent").value : "",
+      kicker: document.getElementById("inKicker").value,
+      index: document.getElementById("inIndex").value,
+      url: document.getElementById("inUrl").value
+    };
+  }
+
+  function syncFieldVisibility() {
+    document.querySelectorAll("[data-modes]").forEach(function (el) {
+      el.classList.toggle("is-on", el.getAttribute("data-modes").split(" ").indexOf(state.mode) !== -1);
+    });
+  }
+
+  function rescale() {
+    var dims = SIZES[state.size];
+    var viewport = document.getElementById("viewport");
+    var scaler = document.getElementById("scaler");
+    var scale = viewport.clientWidth / dims[0];
+    scaler.style.transform = "scale(" + scale + ")";
+    scaler.style.width = dims[0] + "px";
+    viewport.style.height = dims[1] * scale + "px";
+  }
+
+  function render() {
+    syncFieldVisibility();
+    window.BabetteCard.set(state, currentContent());
+    rescale();
+  }
+
+  seg("modeSeg", "mode", render);
+  seg("variantSeg", "variant", render);
+  seg("sizeSeg", "size", render);
+  document.querySelectorAll(".st-input, .st-textarea").forEach(function (el) {
+    el.addEventListener("input", render);
+  });
+  window.addEventListener("resize", rescale);
+
+  /* ---------- PNG export: frame → SVG foreignObject → canvas ---------- */
+
+  document.getElementById("downloadBtn").addEventListener("click", function () {
+    var btn = this;
+    btn.disabled = true; btn.textContent = "Rendering…";
+
+    var dims = SIZES[state.size];
+    var frame = document.getElementById("frame");
+    var css = document.getElementById("export-fonts").textContent +
+              document.getElementById("export-card").textContent;
+
+    var clone = frame.cloneNode(true);
+    clone.removeAttribute("id");
+    var wrapper = document.createElement("div");
+    wrapper.setAttribute("xmlns", "http://www.w3.org/1999/xhtml");
+    wrapper.appendChild(clone);
+    var markup = new XMLSerializer().serializeToString(wrapper);
+
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + dims[0] + '" height="' + dims[1] + '">' +
+      "<style>" + css.replace(/]]>/g, "") + "</style>" +
+      '<foreignObject width="100%" height="100%">' + markup + "</foreignObject></svg>";
+
+    var img = new Image();
+    img.onload = function () {
+      /* second frame lets embedded fonts finish decoding */
+      requestAnimationFrame(function () { requestAnimationFrame(draw); });
+      function draw() {
+        var canvas = document.createElement("canvas");
+        canvas.width = dims[0]; canvas.height = dims[1];
+        canvas.getContext("2d").drawImage(img, 0, 0, dims[0], dims[1]);
+        canvas.toBlob(function (blob) {
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "babette-" + state.mode + "-" + state.variant + "-" + state.size + ".png";
+          a.click();
+          setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
+          btn.disabled = false; btn.textContent = "Download PNG";
+        }, "image/png");
+      }
+    };
+    img.onerror = function () {
+      btn.disabled = false; btn.textContent = "Export failed — try Chrome";
+    };
+    img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

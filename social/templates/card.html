@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Babette — social card</title>
+<link rel="stylesheet" href="../../kit/babette.css">
+<link rel="stylesheet" href="card.css">
+<style>
+  html, body { margin: 0; padding: 0; background: #555; }
+</style>
+</head>
+<body>
+<!--CARD-->
+<div class="sc-frame v-paper s-feed m-quote" id="frame">
+  <header class="sc-slate">
+    <span>BABETTE</span>
+    <span class="slash">/</span>
+    <span data-slot="kicker">IN THEIR WORDS</span>
+    <span class="slash">/</span>
+    <span data-slot="index">Nº 001</span>
+  </header>
+  <main class="sc-body">
+    <div class="sc-quote" data-slot="quote"></div>
+    <div class="sc-heading" data-slot="heading"></div>
+    <div class="sc-sub" data-slot="sub"></div>
+  </main>
+  <footer class="sc-foot">
+    <div class="sc-rule"></div>
+    <div class="sc-attribution" data-slot="attribution"></div>
+    <div class="sc-event" data-slot="event"></div>
+    <div class="sc-url" data-slot="url">HAVEYOUMETBABETTE.COM</div>
+  </footer>
+</div>
+<!--/CARD-->
+<script>
+/*CARD-SCRIPT*/
+  /* Shared card API — render.js and the studio both drive this. */
+  window.BabetteCard = {
+    /* content: {quote, heading (array of lines, "*line" = accent), sub,
+       attribution, event, kicker, index, url}
+       config:  {variant, size, mode} */
+    set: function (config, content) {
+      var frame = document.getElementById("frame");
+      frame.className = "sc-frame v-" + (config.variant || "paper") +
+        " s-" + (config.size || "feed") + " m-" + (config.mode || "quote");
+
+      function slot(name, value) {
+        var el = frame.querySelector('[data-slot="' + name + '"]');
+        if (!el) return;
+        el.textContent = value || "";
+      }
+      slot("quote", content.quote ? "“" + String(content.quote).trim().replace(/^[“"]|["”]$/g, "") + "”" : "");
+      slot("sub", content.sub);
+      slot("attribution", content.attribution ? "— " + content.attribution : "");
+      slot("event", content.event);
+      slot("kicker", content.kicker || "IN THEIR WORDS");
+      slot("index", content.index || "");
+      slot("url", content.url === "" ? "" : (content.url || "HAVEYOUMETBABETTE.COM"));
+
+      /* heading takes markup for line breaks + accent, built safely */
+      var heading = frame.querySelector('[data-slot="heading"]');
+      heading.textContent = "";
+      (content.heading || []).forEach(function (line, i, all) {
+        var span = document.createElement("span");
+        if (String(line).charAt(0) === "*") {
+          span.className = "accent";
+          line = String(line).slice(1);
+        }
+        span.textContent = line;
+        heading.appendChild(span);
+        if (i < all.length - 1) heading.appendChild(document.createElement("br"));
+      });
+
+      this.fit();
+    },
+
+    /* shrink the quote until it fits its column */
+    fit: function () {
+      var frame = document.getElementById("frame");
+      var quote = frame.querySelector(".sc-quote");
+      var body = frame.querySelector(".sc-body");
+      if (!quote || !quote.textContent) return;
+      var size = 96;
+      quote.style.fontSize = size + "px";
+      while (size > 40 && (quote.scrollHeight > body.clientHeight || quote.scrollWidth > body.clientWidth)) {
+        size -= 4;
+        quote.style.fontSize = size + "px";
+      }
+    }
+  };
+/*/CARD-SCRIPT*/
+</script>
+</body>
+</html>

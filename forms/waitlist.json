@@ -1,0 +1,80 @@
+{
+  "slug": "waitlist",
+  "number": "005",
+  "slateLabel": "THE WAITLIST",
+  "title": "The Waitlist — Babette",
+  "metaDescription": "Your date is spoken for — but seasons turn. Join the waitlist.",
+  "heading": ["NEXT", "SEASON,", "THEN"],
+  "headingAccent": 0,
+  "intro": "Your date was spoken for — infuriating, we know. Leave your details and you’re first in line if it frees up, and first to hear when the next season opens.",
+  "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",
+  "cc": "sarah@haveyoumetbabette.com",
+  "subject": "Waitlist — future seasons",
+  "fallbackEmail": "ozy@haveyoumetbabette.com",
+  "privacyUrl": "https://haveyoumetbabette.com/privacy",
+  "homeUrl": "https://haveyoumetbabette.com",
+  "submitLabel": "Hold my place",
+  "success": {
+    "message": "You’re on the list. If the diary shifts, you’re the first to know.",
+    "sub": "HAVE YOU MET BABETTE?"
+  },
+  "steps": [
+    {
+      "marker": "HOLD MY PLACE",
+      "fields": [
+        {
+          "kind": "text",
+          "name": "names",
+          "label": "Your names",
+          "required": true,
+          "autocomplete": "name",
+          "error": "So we know who we’re holding the place for."
+        },
+        {
+          "kind": "email",
+          "name": "email",
+          "label": "Email",
+          "required": true,
+          "autocomplete": "email",
+          "error": "We’ll need an email to reply to you.",
+          "errorFormat": "That email doesn’t look quite right."
+        },
+        {
+          "kind": "date",
+          "name": "preferred_date",
+          "label": "The date you wanted",
+          "required": true,
+          "requiredUnless": "season_led",
+          "error": "Give us the date — or tick season-led below."
+        },
+        {
+          "kind": "check",
+          "name": "season_led",
+          "text": "Season-led — we’d move for the right month.",
+          "value": "Season-led"
+        },
+        {
+          "kind": "chips",
+          "name": "season",
+          "label": "If season-led, which one?",
+          "columns": 3,
+          "options": [
+            { "value": "Spring" },
+            { "value": "Summer" },
+            { "value": "Autumn" },
+            { "value": "Winter" },
+            { "value": "Whenever it’s right" }
+          ]
+        },
+        {
+          "kind": "check",
+          "name": "consent_contact",
+          "required": true,
+          "text": "You may keep my details to contact me about future availability — see the {privacy}.",
+          "value": "Consented",
+          "error": "We can’t hold your place without your say-so."
+        }
+      ]
+    }
+  ]
+}

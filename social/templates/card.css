@@ -1,0 +1,147 @@
+/* ============================================================
+   BABETTE — SOCIAL CARD STYLES
+   Instagram assets in the ARTWORLD language, laid out at true
+   pixel size (1080-wide). Shared by render.js and the studio.
+   Variants: v-paper / v-ink / v-blush / v-gold
+   Sizes:    s-feed 1080×1350 / s-story 1080×1920 / s-square 1080×1080
+   Modes:    m-quote / m-title / m-closing / m-announce
+   ============================================================ */
+
+.sc-frame {
+  --sc-ink:    #000000;
+  --sc-paper:  #FFFFFF;
+  --sc-splash: #E2261A;
+  --sc-blush:  #F6E1DE;
+  --sc-gold:   #EDB421;
+
+  --sc-fg:     var(--sc-ink);
+  --sc-bg:     var(--sc-paper);
+  --sc-accent: var(--sc-splash);
+
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: var(--sc-bg);
+  color: var(--sc-fg);
+  font-family: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 300;
+  padding: 84px 96px 88px;
+  overflow: hidden;
+}
+.sc-frame *, .sc-frame *::before, .sc-frame *::after { box-sizing: border-box; }
+
+/* sizes */
+.sc-frame.s-feed   { width: 1080px; height: 1350px; }
+.sc-frame.s-square { width: 1080px; height: 1080px; }
+.sc-frame.s-story  { width: 1080px; height: 1920px; padding-top: 230px; padding-bottom: 240px; }
+
+/* variants */
+.sc-frame.v-ink   { --sc-fg: var(--sc-paper); --sc-bg: var(--sc-ink); }
+.sc-frame.v-blush { --sc-bg: var(--sc-blush); }
+.sc-frame.v-gold  { --sc-accent: var(--sc-gold); }
+
+/* ---------- slate header ---------- */
+
+.sc-slate {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 30px;
+  border-top: 2px solid var(--sc-fg);
+  border-bottom: 2px solid var(--sc-fg);
+  padding: 22px 0;
+  font-size: 21px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  white-space: nowrap;
+  flex: none;
+}
+.sc-slate .slash { color: var(--sc-accent); }
+
+/* ---------- body ---------- */
+
+.sc-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+  padding: 56px 0;
+}
+
+.sc-quote {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 88px;
+  line-height: 1.22;
+  overflow: hidden;
+}
+.sc-frame.v-gold .sc-quote::first-letter { color: inherit; }
+
+.sc-heading {
+  font-family: "Druk Wide Trial", "Archivo Black", Impact, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.98;
+  font-size: 122px;
+}
+.sc-frame.s-story .sc-heading { font-size: 130px; }
+.sc-heading .accent { color: var(--sc-accent); }
+
+.sc-sub {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 1.35;
+  margin-top: 54px;
+  max-width: 20em;
+}
+
+/* ---------- footer ---------- */
+
+.sc-foot { flex: none; }
+.sc-rule {
+  width: 132px;
+  height: 6px;
+  background: var(--sc-accent);
+  margin-bottom: 40px;
+}
+.sc-attribution {
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  line-height: 1.5;
+}
+.sc-event {
+  font-size: 19px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  margin-top: 12px;
+  opacity: 0.72;
+}
+.sc-url {
+  font-size: 17px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  margin-top: 44px;
+  opacity: 0.66;
+}
+
+/* empty slots vanish */
+.sc-frame [data-slot]:empty { display: none; }
+
+/* mode switches: hide what the mode doesn't use */
+.sc-frame.m-quote    .sc-heading,
+.sc-frame.m-quote    .sc-sub      { display: none; }
+.sc-frame.m-title    .sc-quote    { display: none; }
+.sc-frame.m-closing  .sc-quote    { display: none; }
+.sc-frame.m-closing  .sc-rule     { background: var(--sc-gold); }
+.sc-frame.m-announce .sc-quote    { display: none; }

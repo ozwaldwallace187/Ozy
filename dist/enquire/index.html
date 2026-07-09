@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enquire — Babette</title>
+<meta name="description" content="Begin the story. Tell Babette about your wedding, dinner or launch — undone romance, editorial events.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:,">
+<link rel="preload" href="../kit/fonts/CormorantGaramond-Italic-Var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../kit/fonts/Inter-Var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../kit/babette.css">
+</head>
+<body class="bb-page">
+<div class="bb-progress" aria-hidden="true"><span></span></div>
+<header class="bb-slate">
+<div class="bb-slate-row">
+<span>BABETTE</span>
+<span><span class="bb-slash">/</span>&nbsp; ENQUIRY &nbsp;<span class="bb-slash">/</span></span>
+<span>Nº 001</span>
+</div>
+</header>
+<main class="bb-main">
+<section class="bb-masthead">
+<h1 class="bb-display">BEGIN<br>THE<br><span class="accent">STORY</span></h1>
+<p class="bb-intro">Three short pages. Tell us what you’re dreaming of, and we’ll write back within two days.</p>
+</section>
+<form class="bb-form" novalidate
+  data-endpoint="https://formsubmit.co/ajax/ozy@haveyoumetbabette.com"
+  data-subject="New enquiry — haveyoumetbabette.com"
+  data-cc="sarah@haveyoumetbabette.com"
+  data-fallback-email="ozy@haveyoumetbabette.com">
+<p class="bb-form-alert" role="alert" hidden></p>
+<input type="hidden" name="form" value="enquire">
+<input type="hidden" name="theme" data-capture-param="theme">
+<input class="bb-hp" type="text" name="bb_website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<section class="bb-step is-active" aria-label="THE OCCASION">
+<header class="bb-step-head"><span class="bb-step-marker"><span class="num">01</span> — THE OCCASION</span></header>
+<fieldset class="bb-field" data-group-required data-error="Choose one — loosely is fine.">
+<legend class="bb-label">What are we making? <span class="bb-req" aria-hidden="true">*</span></legend>
+<div class="bb-card-grid">
+<label class="bb-card"><input type="radio" name="event_type" value="Wedding"><span class="bb-card-title">Wedding</span><span class="bb-card-note">a whole world, built for a day</span></label>
+<label class="bb-card"><input type="radio" name="event_type" value="Dinner Party"><span class="bb-card-title">Dinner Party</span><span class="bb-card-note">one long table, done properly</span></label>
+<label class="bb-card"><input type="radio" name="event_type" value="Brand or Launch"><span class="bb-card-title">Brand or Launch</span><span class="bb-card-note">editorial, not corporate</span></label>
+<label class="bb-card" data-reveals="#reveal_3"><input type="radio" name="event_type" value="Something Else"><span class="bb-card-title">Something Else</span><span class="bb-card-note">surprise us</span></label>
+</div>
+<div class="bb-reveal" id="reveal_3" hidden><input class="bb-input" name="event_type_detail" type="text" placeholder="Tell us what you’re plotting…" aria-label="Tell us what you’re plotting"></div>
+</fieldset>
+
+<div class="bb-field" data-error="Give us a date — or tick the box below and stay loose.">
+<label class="bb-label" for="f_4">The date, if you have one <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_4" name="event_date" type="date" required data-required-unless="date_flexible" data-error="Give us a date — or tick the box below and stay loose.">
+</div>
+
+<div class="bb-field">
+<label class="bb-check">
+<input type="checkbox" name="date_flexible" value="Flexible / season-led">
+<span class="bb-box" aria-hidden="true"></span>
+<span class="bb-check-text">We’re flexible — the season matters more than the date.</span>
+</label>
+</div>
+
+<fieldset class="bb-field" data-group-required data-error="Pick a place — “not sure yet” counts as Elsewhere.">
+<legend class="bb-label">Where does it happen? <span class="bb-req" aria-hidden="true">*</span></legend>
+<div class="bb-card-grid">
+<label class="bb-card"><input type="radio" name="location" value="La Belle Éco (Aude)"><span class="bb-card-title">La Belle Éco (Aude)</span><span class="bb-card-note">our house in the South of France</span></label>
+<label class="bb-card" data-reveals="#reveal_5"><input type="radio" name="location" value="Elsewhere"><span class="bb-card-title">Elsewhere</span><span class="bb-card-note">we travel</span></label>
+</div>
+<div class="bb-reveal" id="reveal_5" hidden><input class="bb-input" name="location_detail" type="text" placeholder="Where were you thinking?" aria-label="Where were you thinking?"></div>
+</fieldset>
+
+<p class="bb-caption">Babette is location-agnostic — we build worlds wherever the table is.</p>
+</section>
+
+<section class="bb-step" aria-label="THE WORLD">
+<header class="bb-step-head"><span class="bb-step-marker"><span class="num">02</span> — THE WORLD</span></header>
+<fieldset class="bb-field" data-group-required data-error="A rough headcount helps us dream at the right scale.">
+<legend class="bb-label">How many at the table? <span class="bb-req" aria-hidden="true">*</span></legend>
+<div class="bb-card-grid">
+<label class="bb-card"><input type="radio" name="guest_count" value="Under 30"><span class="bb-card-title">Under 30</span></label>
+<label class="bb-card"><input type="radio" name="guest_count" value="30 – 80"><span class="bb-card-title">30 – 80</span></label>
+<label class="bb-card"><input type="radio" name="guest_count" value="80 – 150"><span class="bb-card-title">80 – 150</span></label>
+<label class="bb-card"><input type="radio" name="guest_count" value="150+"><span class="bb-card-title">150+</span></label>
+</div>
+</fieldset>
+
+<fieldset class="bb-field" data-group-required data-error="A band is enough — it shapes what we propose.">
+<legend class="bb-label">Approximate budget <span class="bb-req" aria-hidden="true">*</span></legend>
+<div class="bb-card-grid">
+<label class="bb-card"><input type="radio" name="budget" value="£15 – 30k"><span class="bb-card-title">£15 – 30k</span></label>
+<label class="bb-card"><input type="radio" name="budget" value="£30 – 60k"><span class="bb-card-title">£30 – 60k</span></label>
+<label class="bb-card"><input type="radio" name="budget" value="£60 – 100k"><span class="bb-card-title">£60 – 100k</span></label>
+<label class="bb-card"><input type="radio" name="budget" value="£100k+"><span class="bb-card-title">£100k+</span></label>
+<label class="bb-card"><input type="radio" name="budget" value="Guide me"><span class="bb-card-title">Guide me</span><span class="bb-card-note">we’ll talk you through it</span></label>
+</div>
+</fieldset>
+
+<div class="bb-field">
+<label class="bb-label bb-prompt" for="f_6">Tell us the feeling. A film, a table, a season, a memory — anything.</label>
+<textarea class="bb-textarea" id="f_6" name="the_feeling" rows="4" placeholder="Late August. Candlelight on linen. Everyone stayed too long…"></textarea>
+</div>
+
+<fieldset class="bb-field">
+<legend class="bb-label">Did a package catch your eye? (optional)</legend>
+<div class="bb-card-grid">
+<label class="bb-card slim"><input type="radio" name="package" value="Silhouette"><span class="bb-card-title">Silhouette</span></label>
+<label class="bb-card slim"><input type="radio" name="package" value="Pirouette"><span class="bb-card-title">Pirouette</span></label>
+<label class="bb-card slim"><input type="radio" name="package" value="Pirouette + Sourcing"><span class="bb-card-title">Pirouette + Sourcing</span></label>
+<label class="bb-card slim"><input type="radio" name="package" value="Fleurette"><span class="bb-card-title">Fleurette</span></label>
+<label class="bb-card slim"><input type="radio" name="package" value="Rosette"><span class="bb-card-title">Rosette</span></label>
+<label class="bb-card slim"><input type="radio" name="package" value="Antoinette"><span class="bb-card-title">Antoinette</span></label>
+<label class="bb-card slim"><input type="radio" name="package" value="Not sure yet"><span class="bb-card-title">Not sure yet</span></label>
+</div>
+</fieldset>
+</section>
+
+<section class="bb-step" aria-label="THE PRACTICALS">
+<header class="bb-step-head"><span class="bb-step-marker"><span class="num">03</span> — THE PRACTICALS</span></header>
+<div class="bb-field" data-error="We’ll need to know who’s writing.">
+<label class="bb-label" for="f_7">Your names <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_7" name="names" type="text" required placeholder="Hannah &amp; Angus" autocomplete="name" data-error="We’ll need to know who’s writing.">
+</div>
+
+<div class="bb-field" data-error="We’ll need an email to reply to you.">
+<label class="bb-label" for="f_8">Email <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_8" name="email" type="email" required autocomplete="email" data-error="We’ll need an email to reply to you." data-error-format="That email doesn’t look quite right.">
+</div>
+
+<div class="bb-field">
+<label class="bb-label" for="f_9">Phone (optional)</label>
+<input class="bb-input" id="f_9" name="phone" type="tel" autocomplete="tel">
+</div>
+
+<fieldset class="bb-field">
+<legend class="bb-label">How did you find Babette?</legend>
+<div class="bb-card-grid cols-3">
+<label class="bb-card slim"><input type="radio" name="found_via" value="Instagram"><span class="bb-card-title">Instagram</span></label>
+<label class="bb-card slim"><input type="radio" name="found_via" value="Referral"><span class="bb-card-title">Referral</span></label>
+<label class="bb-card slim"><input type="radio" name="found_via" value="Press"><span class="bb-card-title">Press</span></label>
+<label class="bb-card slim"><input type="radio" name="found_via" value="Google"><span class="bb-card-title">Google</span></label>
+<label class="bb-card slim"><input type="radio" name="found_via" value="Other"><span class="bb-card-title">Other</span></label>
+</div>
+</fieldset>
+
+<div class="bb-field" data-error="We can’t write back without your say-so.">
+<label class="bb-check">
+<input type="checkbox" name="consent_contact" value="Consented" required>
+<span class="bb-box" aria-hidden="true"></span>
+<span class="bb-check-text">You may keep my details to reply to this enquiry and hold it on file. You’ll never share them — see the <a href="https://haveyoumetbabette.com/privacy">privacy notice</a>.</span>
+</label>
+</div>
+</section>
+<div class="bb-nav">
+<button type="button" class="bb-btn ghost bb-back">← Back</button>
+<button type="button" class="bb-btn bb-next">Continue →</button>
+<button type="submit" class="bb-btn bb-submit" style="display:none">Send it to us</button>
+</div>
+</form>
+</main>
+<footer class="bb-foot">
+<p class="bb-signoff">Have You Met Babette?</p>
+<nav class="bb-foot-links"><a href="https://haveyoumetbabette.com">haveyoumetbabette.com</a>
+<a href="https://haveyoumetbabette.com/privacy">Privacy</a></nav>
+</footer>
+<div class="bb-success" role="status" hidden>
+<div class="bb-success-inner">
+<p class="bb-success-slate">BABETTE <span class="bb-slash" style="color:var(--splash)">/</span> RECEIVED</p>
+<p class="bb-success-msg">Enchanté. We’ll be in touch within two days.</p>
+<div class="bb-gold-rule"></div>
+<p class="bb-success-sub">HAVE YOU MET BABETTE?</p>
+</div>
+</div>
+<script src="../kit/babette-forms.js"></script>
+</body>
+</html>

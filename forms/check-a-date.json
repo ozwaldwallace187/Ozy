@@ -1,0 +1,49 @@
+{
+  "slug": "check-a-date",
+  "number": "004",
+  "slateLabel": "THE DATE",
+  "title": "Check a Date — Babette",
+  "metaDescription": "Two fields. Your date, your email — we’ll reply with availability.",
+  "heading": ["IS IT", "FREE?"],
+  "headingAccent": 1,
+  "intro": "Your date and your email. We’ll write back with availability — usually the same day.",
+  "captureParams": ["theme"],
+  "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",
+  "cc": "sarah@haveyoumetbabette.com",
+  "subject": "Availability request — check a date",
+  "fallbackEmail": "ozy@haveyoumetbabette.com",
+  "privacyUrl": "https://haveyoumetbabette.com/privacy",
+  "homeUrl": "https://haveyoumetbabette.com",
+  "submitLabel": "Check it",
+  "success": {
+    "message": "Checking the diary. You’ll hear from us shortly.",
+    "sub": "HAVE YOU MET BABETTE?"
+  },
+  "steps": [
+    {
+      "marker": "THE ESSENTIALS",
+      "fields": [
+        {
+          "kind": "date",
+          "name": "event_date",
+          "label": "Your date",
+          "required": true,
+          "error": "We can’t check the diary without a date."
+        },
+        {
+          "kind": "email",
+          "name": "email",
+          "label": "Your email",
+          "required": true,
+          "autocomplete": "email",
+          "error": "We’ll need an email to reply to you.",
+          "errorFormat": "That email doesn’t look quite right."
+        },
+        {
+          "kind": "note",
+          "text": "That’s genuinely all. We’ll keep your email only to answer this."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "slug": "in-their-words",
+  "number": "002",
+  "slateLabel": "IN THEIR WORDS",
+  "title": "In Their Words — Babette",
+  "metaDescription": "Five short questions about the world we built together.",
+  "robots": "noindex,follow",
+  "heading": ["IN", "THEIR", "WORDS"],
+  "headingAccent": 1,
+  "intro": "Five short questions. One honest sentence each — that’s all we’re after.",
+  "personalization": { "param": "c", "prefix": "For ", "suffix": " — it was a joy." },
+  "captureParams": ["c", "e"],
+  "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",
+  "cc": "sarah@haveyoumetbabette.com",
+  "subject": "In their words — testimonial received",
+  "fallbackEmail": "ozy@haveyoumetbabette.com",
+  "privacyUrl": "https://haveyoumetbabette.com/privacy",
+  "homeUrl": "https://haveyoumetbabette.com",
+  "submitLabel": "Send our words",
+  "success": {
+    "message": "Thank you. Truly. Your words will be treated with the same care as your table was.",
+    "sub": "HAVE YOU MET BABETTE?"
+  },
+  "steps": [
+    {
+      "marker": "THE WORDS",
+      "fields": [
+        {
+          "kind": "textarea",
+          "name": "q1_feeling",
+          "label": "In one sentence — what did the day feel like?",
+          "prompt": true,
+          "required": true,
+          "rows": 2,
+          "error": "One sentence — the first one that comes to mind."
+        },
+        {
+          "kind": "textarea",
+          "name": "q2_moment",
+          "label": "What’s the moment you keep returning to?",
+          "prompt": true,
+          "rows": 3
+        },
+        {
+          "kind": "textarea",
+          "name": "q3_surprise",
+          "label": "What surprised you about working with us?",
+          "prompt": true,
+          "rows": 3
+        },
+        {
+          "kind": "textarea",
+          "name": "q4_friend",
+          "label": "What would you tell a friend who’s deciding?",
+          "prompt": true,
+          "rows": 3
+        },
+        {
+          "kind": "text",
+          "name": "q5_three_words",
+          "label": "Three words for the world we built together.",
+          "prompt": true,
+          "placeholder": "e.g. wild, golden, unhurried"
+        }
+      ]
+    },
+    {
+      "marker": "YOUR PERMISSION",
+      "fields": [
+        {
+          "kind": "text",
+          "name": "names",
+          "label": "Your names",
+          "required": true,
+          "autocomplete": "name",
+          "placeholder": "Hannah & Angus",
+          "error": "So we know whose words these are."
+        },
+        {
+          "kind": "checks",
+          "label": "You may…",
+          "items": [
+            { "name": "consent_website", "text": "Publish my words on your website.", "value": "Website — yes" },
+            { "name": "consent_social", "text": "Publish my words on social media.", "value": "Social — yes" },
+            { "name": "consent_photos", "text": "Pair my words with photographs from our event.", "value": "Photos — yes" }
+          ],
+          "hint": "Tick only what you’re comfortable with — untouched boxes mean no."
+        },
+        {
+          "kind": "chips",
+          "name": "attribution_display",
+          "label": "Display my words as…",
+          "required": true,
+          "columns": 3,
+          "error": "Choose how we should sign your words.",
+          "options": [
+            { "value": "Full names" },
+            { "value": "First names" },
+            { "value": "Initials" }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "links",
+  "slug": "bio",
+  "number": "000",
+  "slateLabel": "THE HUB",
+  "title": "Have You Met Babette?",
+  "metaDescription": "Undone romance, editorial events. Enquire, check a date, meet the packages.",
+  "heading": ["HAVE", "YOU MET", "BABETTE?"],
+  "headingAccent": 2,
+  "intro": "Undone romance. Editorial events. Every road below ends at a table.",
+  "privacyUrl": "https://haveyoumetbabette.com/privacy",
+  "homeUrl": "https://haveyoumetbabette.com",
+  "links": [
+    { "title": "ENQUIRE", "note": "begin the story — three short pages", "href": "../enquire/" },
+    { "title": "CHECK A DATE", "note": "two fields, one quick answer", "href": "../check-a-date/" },
+    { "title": "THE PACKAGES", "note": "Silhouette to Antoinette", "href": "https://haveyoumetbabette.com/#packages" },
+    { "title": "IN THEIR WORDS", "note": "what the tables say afterwards", "href": "https://haveyoumetbabette.com/#words" },
+    { "title": "PRESS & COLLABORATION", "note": "features, shoots, borrowed tablescapes", "href": "../press/" }
+  ]
+}

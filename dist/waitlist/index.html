@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Waitlist — Babette</title>
+<meta name="description" content="Your date is spoken for — but seasons turn. Join the waitlist.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:,">
+<link rel="preload" href="../kit/fonts/CormorantGaramond-Italic-Var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../kit/fonts/Inter-Var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../kit/babette.css">
+</head>
+<body class="bb-page">
+<header class="bb-slate">
+<div class="bb-slate-row">
+<span>BABETTE</span>
+<span><span class="bb-slash">/</span>&nbsp; THE WAITLIST &nbsp;<span class="bb-slash">/</span></span>
+<span>Nº 005</span>
+</div>
+</header>
+<main class="bb-main">
+<section class="bb-masthead">
+<h1 class="bb-display"><span class="accent">NEXT</span><br>SEASON,<br>THEN</h1>
+<p class="bb-intro">Your date was spoken for — infuriating, we know. Leave your details and you’re first in line if it frees up, and first to hear when the next season opens.</p>
+</section>
+<form class="bb-form" novalidate
+  data-endpoint="https://formsubmit.co/ajax/ozy@haveyoumetbabette.com"
+  data-subject="Waitlist — future seasons"
+  data-cc="sarah@haveyoumetbabette.com"
+  data-fallback-email="ozy@haveyoumetbabette.com">
+<p class="bb-form-alert" role="alert" hidden></p>
+<input type="hidden" name="form" value="waitlist">
+<input class="bb-hp" type="text" name="bb_website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<section class="bb-step is-active" aria-label="HOLD MY PLACE">
+<header class="bb-step-head"><span class="bb-step-marker"><span class="num">01</span> — HOLD MY PLACE</span></header>
+<div class="bb-field" data-error="So we know who we’re holding the place for.">
+<label class="bb-label" for="f_33">Your names <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_33" name="names" type="text" required autocomplete="name" data-error="So we know who we’re holding the place for.">
+</div>
+
+<div class="bb-field" data-error="We’ll need an email to reply to you.">
+<label class="bb-label" for="f_34">Email <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_34" name="email" type="email" required autocomplete="email" data-error="We’ll need an email to reply to you." data-error-format="That email doesn’t look quite right.">
+</div>
+
+<div class="bb-field" data-error="Give us the date — or tick season-led below.">
+<label class="bb-label" for="f_35">The date you wanted <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_35" name="preferred_date" type="date" required data-required-unless="season_led" data-error="Give us the date — or tick season-led below.">
+</div>
+
+<div class="bb-field">
+<label class="bb-check">
+<input type="checkbox" name="season_led" value="Season-led">
+<span class="bb-box" aria-hidden="true"></span>
+<span class="bb-check-text">Season-led — we’d move for the right month.</span>
+</label>
+</div>
+
+<fieldset class="bb-field">
+<legend class="bb-label">If season-led, which one?</legend>
+<div class="bb-card-grid cols-3">
+<label class="bb-card slim"><input type="radio" name="season" value="Spring"><span class="bb-card-title">Spring</span></label>
+<label class="bb-card slim"><input type="radio" name="season" value="Summer"><span class="bb-card-title">Summer</span></label>
+<label class="bb-card slim"><input type="radio" name="season" value="Autumn"><span class="bb-card-title">Autumn</span></label>
+<label class="bb-card slim"><input type="radio" name="season" value="Winter"><span class="bb-card-title">Winter</span></label>
+<label class="bb-card slim"><input type="radio" name="season" value="Whenever it’s right"><span class="bb-card-title">Whenever it’s right</span></label>
+</div>
+</fieldset>
+
+<div class="bb-field" data-error="We can’t hold your place without your say-so.">
+<label class="bb-check">
+<input type="checkbox" name="consent_contact" value="Consented" required>
+<span class="bb-box" aria-hidden="true"></span>
+<span class="bb-check-text">You may keep my details to contact me about future availability — see the <a href="https://haveyoumetbabette.com/privacy">privacy notice</a>.</span>
+</label>
+</div>
+</section>
+<div class="bb-nav">
+<span></span>
+<button type="submit" class="bb-btn bb-submit">Hold my place</button>
+</div>
+</form>
+</main>
+<footer class="bb-foot">
+<p class="bb-signoff">Have You Met Babette?</p>
+<nav class="bb-foot-links"><a href="https://haveyoumetbabette.com">haveyoumetbabette.com</a>
+<a href="https://haveyoumetbabette.com/privacy">Privacy</a></nav>
+</footer>
+<div class="bb-success" role="status" hidden>
+<div class="bb-success-inner">
+<p class="bb-success-slate">BABETTE <span class="bb-slash" style="color:var(--splash)">/</span> RECEIVED</p>
+<p class="bb-success-msg">You’re on the list. If the diary shifts, you’re the first to know.</p>
+<div class="bb-gold-rule"></div>
+<p class="bb-success-sub">HAVE YOU MET BABETTE?</p>
+</div>
+</div>
+<script src="../kit/babette-forms.js"></script>
+</body>
+</html>

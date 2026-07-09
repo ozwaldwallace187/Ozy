@@ -1,0 +1,10 @@
+{
+  "name": "babette-suite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Babette — the enquiry suite. Form engine, ARTWORLD design kit, quote-to-social pipeline.",
+  "scripts": {
+    "build": "node engine/build.js",
+    "render": "node social/render.js"
+  }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work With Babette — Supplier Intake</title>
+<meta name="description" content="Chefs, florists, makers, musicians — introduce yourself to Babette.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:,">
+<link rel="preload" href="../kit/fonts/CormorantGaramond-Italic-Var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../kit/fonts/Inter-Var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../kit/babette.css">
+</head>
+<body class="bb-page">
+<div class="bb-progress" aria-hidden="true"><span></span></div>
+<header class="bb-slate">
+<div class="bb-slate-row">
+<span>BABETTE</span>
+<span><span class="bb-slash">/</span>&nbsp; THE ATELIER &nbsp;<span class="bb-slash">/</span></span>
+<span>Nº 007</span>
+</div>
+</header>
+<main class="bb-main">
+<section class="bb-masthead">
+<h1 class="bb-display">JOIN<br>THE<br><span class="accent">ATELIER</span></h1>
+<p class="bb-intro">Chefs, florists, makers, musicians, borrowers and builders — we keep a small black book of people who do things properly. Introduce yourself.</p>
+</section>
+<form class="bb-form" novalidate
+  data-endpoint="https://formsubmit.co/ajax/ozy@haveyoumetbabette.com"
+  data-subject="Supplier intake — the atelier"
+  data-cc="sarah@haveyoumetbabette.com"
+  data-fallback-email="ozy@haveyoumetbabette.com">
+<p class="bb-form-alert" role="alert" hidden></p>
+<input type="hidden" name="form" value="suppliers">
+<input class="bb-hp" type="text" name="bb_website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<section class="bb-step is-active" aria-label="WHO YOU ARE">
+<header class="bb-step-head"><span class="bb-step-marker"><span class="num">01</span> — WHO YOU ARE</span></header>
+<div class="bb-field" data-error="We’ll need a name for the book.">
+<label class="bb-label" for="f_19">Business name <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_19" name="business" type="text" required data-error="We’ll need a name for the book.">
+</div>
+
+<div class="bb-field" data-error="And the person behind it.">
+<label class="bb-label" for="f_20">Your name <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_20" name="contact_name" type="text" required autocomplete="name" data-error="And the person behind it.">
+</div>
+
+<div class="bb-field" data-error="We’ll need an email to reply to you.">
+<label class="bb-label" for="f_21">Email <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_21" name="email" type="email" required autocomplete="email" data-error="We’ll need an email to reply to you." data-error-format="That email doesn’t look quite right.">
+</div>
+
+<div class="bb-field" data-error="Show us your work — a handle or a site.">
+<label class="bb-label" for="f_22">Website or Instagram <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_22" name="links" type="text" required placeholder="@yourhandle or yoursite.com" data-error="Show us your work — a handle or a site.">
+</div>
+</section>
+
+<section class="bb-step" aria-label="WHAT YOU DO">
+<header class="bb-step-head"><span class="bb-step-marker"><span class="num">02</span> — WHAT YOU DO</span></header>
+<fieldset class="bb-field" data-group-required data-error="Tick at least one.">
+<legend class="bb-label">Your discipline — tick all that apply <span class="bb-req" aria-hidden="true">*</span></legend>
+<div class="bb-card-grid">
+<label class="bb-card slim"><input type="checkbox" name="discipline" value="Food &amp; Chef"><span class="bb-card-title">Food &amp; Chef</span></label>
+<label class="bb-card slim"><input type="checkbox" name="discipline" value="Florals"><span class="bb-card-title">Florals</span></label>
+<label class="bb-card slim"><input type="checkbox" name="discipline" value="Furniture &amp; Tableware"><span class="bb-card-title">Furniture &amp; Tableware</span></label>
+<label class="bb-card slim"><input type="checkbox" name="discipline" value="Wine &amp; Bar"><span class="bb-card-title">Wine &amp; Bar</span></label>
+<label class="bb-card slim"><input type="checkbox" name="discipline" value="Music &amp; Performance"><span class="bb-card-title">Music &amp; Performance</span></label>
+<label class="bb-card slim"><input type="checkbox" name="discipline" value="Photography &amp; Film"><span class="bb-card-title">Photography &amp; Film</span></label>
+<label class="bb-card slim"><input type="checkbox" name="discipline" value="Production &amp; Crew"><span class="bb-card-title">Production &amp; Crew</span></label>
+<label class="bb-card slim" data-reveals="#reveal_23"><input type="checkbox" name="discipline" value="Something Else"><span class="bb-card-title">Something Else</span></label>
+</div>
+<div class="bb-reveal" id="reveal_23" hidden><input class="bb-input" name="discipline_detail" type="text" placeholder="Name your craft…" aria-label="Name your craft"></div>
+</fieldset>
+
+<div class="bb-field">
+<label class="bb-label" for="f_24">Cuisine or speciality, in a phrase</label>
+<input class="bb-input" id="f_24" name="speciality" type="text" placeholder="e.g. fire-cooked Basque, sculptural ikebana, vintage silverware">
+</div>
+
+<div class="bb-field" data-error="Roughly where can we book you?">
+<label class="bb-label" for="f_25">Where you work <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_25" name="territory" type="text" required placeholder="e.g. Aude &amp; Occitanie, UK-wide, will travel" data-error="Roughly where can we book you?">
+</div>
+
+<div class="bb-field">
+<label class="bb-label bb-prompt" for="f_26">Anything else we should know — the thing that makes you, you.</label>
+<textarea class="bb-textarea" id="f_26" name="notes" rows="3"></textarea>
+</div>
+
+<div class="bb-field" data-error="We can’t keep you in the book without your say-so.">
+<label class="bb-check">
+<input type="checkbox" name="consent_contact" value="Consented" required>
+<span class="bb-box" aria-hidden="true"></span>
+<span class="bb-check-text">You may keep my details on file and contact me about future work — see the <a href="https://haveyoumetbabette.com/privacy">privacy notice</a>.</span>
+</label>
+</div>
+</section>
+<div class="bb-nav">
+<button type="button" class="bb-btn ghost bb-back">← Back</button>
+<button type="button" class="bb-btn bb-next">Continue →</button>
+<button type="submit" class="bb-btn bb-submit" style="display:none">Introduce yourself</button>
+</div>
+</form>
+</main>
+<footer class="bb-foot">
+<p class="bb-signoff">Have You Met Babette?</p>
+<nav class="bb-foot-links"><a href="https://haveyoumetbabette.com">haveyoumetbabette.com</a>
+<a href="https://haveyoumetbabette.com/privacy">Privacy</a></nav>
+</footer>
+<div class="bb-success" role="status" hidden>
+<div class="bb-success-inner">
+<p class="bb-success-slate">BABETTE <span class="bb-slash" style="color:var(--splash)">/</span> RECEIVED</p>
+<p class="bb-success-msg">Noted in the black book. If a table calls for you, we’ll write.</p>
+<div class="bb-gold-rule"></div>
+<p class="bb-success-sub">HAVE YOU MET BABETTE?</p>
+</div>
+</div>
+<script src="../kit/babette-forms.js"></script>
+</body>
+</html>

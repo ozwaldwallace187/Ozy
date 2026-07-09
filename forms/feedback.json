@@ -1,0 +1,83 @@
+{
+  "slug": "feedback",
+  "number": "003",
+  "slateLabel": "AFTERWORD",
+  "title": "The Afterword — Babette",
+  "metaDescription": "Post-event feedback for Babette. Candour welcome.",
+  "robots": "noindex,nofollow",
+  "heading": ["THE", "AFTER", "WORD"],
+  "headingAccent": 2,
+  "intro": "The party’s over; the tablecloths are in the wash. Tell us how it really was — candour is the kindest thing you can give us.",
+  "personalization": { "param": "c", "prefix": "For ", "suffix": " —" },
+  "captureParams": ["c", "e"],
+  "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",
+  "cc": "sarah@haveyoumetbabette.com",
+  "subject": "Afterword — post-event feedback",
+  "fallbackEmail": "ozy@haveyoumetbabette.com",
+  "privacyUrl": "https://haveyoumetbabette.com/privacy",
+  "homeUrl": "https://haveyoumetbabette.com",
+  "submitLabel": "Send the afterword",
+  "success": {
+    "message": "Read, noted, taken to heart. Thank you for telling us straight.",
+    "sub": "HAVE YOU MET BABETTE?"
+  },
+  "steps": [
+    {
+      "marker": "HOW IT WAS",
+      "fields": [
+        {
+          "kind": "text",
+          "name": "names",
+          "label": "Your names",
+          "required": true,
+          "autocomplete": "name",
+          "error": "So we know whose day we’re learning from."
+        },
+        {
+          "kind": "cards",
+          "name": "overall",
+          "label": "Overall, the day was…",
+          "required": true,
+          "error": "Pick the closest one — you can qualify it below.",
+          "options": [
+            { "value": "Everything we hoped", "note": "and then some" },
+            { "value": "Wonderful, with notes", "note": "we want the notes" },
+            { "value": "Mixed", "note": "tell us everything" }
+          ]
+        },
+        {
+          "kind": "textarea",
+          "name": "best_moment",
+          "label": "What was the best decision we made together?",
+          "prompt": true,
+          "rows": 3
+        },
+        {
+          "kind": "textarea",
+          "name": "do_differently",
+          "label": "And honestly — what should we have done differently?",
+          "prompt": true,
+          "rows": 3
+        },
+        {
+          "kind": "cards",
+          "name": "recommend",
+          "label": "Would you send a friend to us?",
+          "required": true,
+          "error": "One tick — it tells us most of what we need.",
+          "options": [
+            { "value": "Without hesitation" },
+            { "value": "Probably" },
+            { "value": "Let’s talk first" }
+          ]
+        },
+        {
+          "kind": "check",
+          "name": "testimonial_invite",
+          "text": "You may write to me about sharing a few words publicly.",
+          "value": "Open to testimonial invite"
+        }
+      ]
+    }
+  ]
+}

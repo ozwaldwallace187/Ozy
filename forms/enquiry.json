@@ -1,0 +1,191 @@
+{
+  "slug": "enquire",
+  "number": "001",
+  "slateLabel": "ENQUIRY",
+  "title": "Enquire — Babette",
+  "metaDescription": "Begin the story. Tell Babette about your wedding, dinner or launch — undone romance, editorial events.",
+  "heading": ["BEGIN", "THE", "STORY"],
+  "headingAccent": 2,
+  "intro": "Three short pages. Tell us what you’re dreaming of, and we’ll write back within two days.",
+  "captureParams": ["theme"],
+  "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",
+  "cc": "sarah@haveyoumetbabette.com",
+  "subject": "New enquiry — haveyoumetbabette.com",
+  "fallbackEmail": "ozy@haveyoumetbabette.com",
+  "privacyUrl": "https://haveyoumetbabette.com/privacy",
+  "homeUrl": "https://haveyoumetbabette.com",
+  "submitLabel": "Send it to us",
+  "success": {
+    "message": "Enchanté. We’ll be in touch within two days.",
+    "sub": "HAVE YOU MET BABETTE?"
+  },
+  "steps": [
+    {
+      "marker": "THE OCCASION",
+      "fields": [
+        {
+          "kind": "cards",
+          "name": "event_type",
+          "label": "What are we making?",
+          "required": true,
+          "error": "Choose one — loosely is fine.",
+          "options": [
+            { "value": "Wedding", "note": "a whole world, built for a day" },
+            { "value": "Dinner Party", "note": "one long table, done properly" },
+            { "value": "Brand or Launch", "note": "editorial, not corporate" },
+            {
+              "value": "Something Else",
+              "note": "surprise us",
+              "reveal": {
+                "name": "event_type_detail",
+                "label": "Tell us what you’re plotting",
+                "placeholder": "Tell us what you’re plotting…"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "date",
+          "name": "event_date",
+          "label": "The date, if you have one",
+          "required": true,
+          "requiredUnless": "date_flexible",
+          "error": "Give us a date — or tick the box below and stay loose."
+        },
+        {
+          "kind": "check",
+          "name": "date_flexible",
+          "text": "We’re flexible — the season matters more than the date.",
+          "value": "Flexible / season-led"
+        },
+        {
+          "kind": "cards",
+          "name": "location",
+          "label": "Where does it happen?",
+          "required": true,
+          "error": "Pick a place — “not sure yet” counts as Elsewhere.",
+          "options": [
+            { "value": "La Belle Éco (Aude)", "note": "our house in the South of France" },
+            {
+              "value": "Elsewhere",
+              "note": "we travel",
+              "reveal": {
+                "name": "location_detail",
+                "label": "Where were you thinking?",
+                "placeholder": "Where were you thinking?"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "note",
+          "text": "Babette is location-agnostic — we build worlds wherever the table is."
+        }
+      ]
+    },
+    {
+      "marker": "THE WORLD",
+      "fields": [
+        {
+          "kind": "cards",
+          "name": "guest_count",
+          "label": "How many at the table?",
+          "required": true,
+          "error": "A rough headcount helps us dream at the right scale.",
+          "options": [
+            { "value": "Under 30" },
+            { "value": "30 – 80" },
+            { "value": "80 – 150" },
+            { "value": "150+" }
+          ]
+        },
+        {
+          "kind": "cards",
+          "name": "budget",
+          "label": "Approximate budget",
+          "required": true,
+          "error": "A band is enough — it shapes what we propose.",
+          "options": [
+            { "value": "£15 – 30k" },
+            { "value": "£30 – 60k" },
+            { "value": "£60 – 100k" },
+            { "value": "£100k+" },
+            { "value": "Guide me", "note": "we’ll talk you through it" }
+          ]
+        },
+        {
+          "kind": "textarea",
+          "name": "the_feeling",
+          "label": "Tell us the feeling. A film, a table, a season, a memory — anything.",
+          "prompt": true,
+          "rows": 4,
+          "placeholder": "Late August. Candlelight on linen. Everyone stayed too long…"
+        },
+        {
+          "kind": "chips",
+          "name": "package",
+          "label": "Did a package catch your eye? (optional)",
+          "options": [
+            { "value": "Silhouette" },
+            { "value": "Pirouette" },
+            { "value": "Pirouette + Sourcing" },
+            { "value": "Fleurette" },
+            { "value": "Rosette" },
+            { "value": "Antoinette" },
+            { "value": "Not sure yet" }
+          ]
+        }
+      ]
+    },
+    {
+      "marker": "THE PRACTICALS",
+      "fields": [
+        {
+          "kind": "text",
+          "name": "names",
+          "label": "Your names",
+          "required": true,
+          "autocomplete": "name",
+          "placeholder": "Hannah & Angus",
+          "error": "We’ll need to know who’s writing."
+        },
+        {
+          "kind": "email",
+          "name": "email",
+          "label": "Email",
+          "required": true,
+          "autocomplete": "email",
+          "error": "We’ll need an email to reply to you.",
+          "errorFormat": "That email doesn’t look quite right."
+        },
+        {
+          "kind": "tel",
+          "name": "phone",
+          "label": "Phone (optional)",
+          "autocomplete": "tel"
+        },
+        {
+          "kind": "chips",
+          "name": "found_via",
+          "label": "How did you find Babette?",
+          "columns": 3,
+          "options": [
+            { "value": "Instagram" },
+            { "value": "Referral" },
+            { "value": "Press" },
+            { "value": "Google" },
+            { "value": "Other" }
+          ]
+        },
+        {
+          "kind": "check",
+          "name": "consent_contact",
+          "required": true,
+          "text": "You may keep my details to reply to this enquiry and hold it on file. You’ll never share them — see the {privacy}.",
+          "value": "Consented",
+          "error": "We can’t write back without your say-so."
+        }
+      ]
+    }
+  ]
+}
