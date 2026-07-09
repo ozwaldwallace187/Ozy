@@ -291,8 +291,8 @@ function shell(config, body) {
 <meta name="description" content="${attr(config.metaDescription || "")}">
 <meta name="robots" content="${attr(config.robots || "index,follow")}">
 <link rel="icon" href="data:,">
-<link rel="preload" href="../kit/fonts/CormorantGaramond-Italic-Var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../kit/fonts/Inter-Var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../kit/fonts/CormorantGaramond-Italic-Var.woff2" as="font" type="font/woff2">
+<link rel="preload" href="../kit/fonts/Inter-Var.woff2" as="font" type="font/woff2">
 <link rel="stylesheet" href="../kit/babette.css">
 </head>
 <body class="bb-page">
