@@ -106,7 +106,6 @@
   margin-left: -0.04em;
 }
 .sc-frame.s-story .sc-heading { font-size: 180px; }
-.sc-heading .accent { color: var(--sc-accent); }
 
 /* the real wordmark — shown on closing cards when no heading is given */
 .sc-logo { display: none; width: 82%; }

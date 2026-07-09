@@ -94,8 +94,8 @@ node social/render.js --set social/sets/example-set.json --out-dir out/
 
 A `--set` file with a `quotes` array expands to a full carousel: title card →
 one slide per quote → closing card ("HAVE YOU MET BABETTE?" + enquiry URL).
-Announcement cards (`--mode announce --heading "NOW|BOOKING|*2027"`) come from
-the same templates — `*` marks the splash-red line. Requires `playwright`
+Announcement cards (`--mode announce --heading "NOW|BOOKING|2027"`) come from
+the same templates. Requires `playwright`
 (or `puppeteer-core` + `CHROME_PATH`) — the templates and studio need nothing.
 
 ## Fonts & design provenance

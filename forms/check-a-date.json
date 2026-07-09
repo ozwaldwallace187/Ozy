@@ -5,7 +5,6 @@
   "title": "Check a Date — Babette",
   "metaDescription": "Two fields. Your date, your email — we’ll reply with availability.",
   "heading": ["IS IT", "FREE?"],
-  "headingAccent": 1,
   "intro": "Your date and your email. We’ll write back with availability — usually the same day.",
   "captureParams": ["theme"],
   "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",

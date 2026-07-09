@@ -6,7 +6,6 @@
   "metaDescription": "Five short questions about the world we built together.",
   "robots": "noindex,follow",
   "heading": ["IN", "THEIR", "WORDS"],
-  "headingAccent": 1,
   "intro": "Five short questions. One honest sentence each — that’s all we’re after.",
   "personalization": { "param": "c", "prefix": "For ", "suffix": " — it was a joy." },
   "captureParams": ["c", "e"],

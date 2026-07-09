@@ -81,16 +81,12 @@
       frame.querySelector(".sc-index").style.display = content.index ? "" : "none";
       frame.classList.toggle("has-heading", !!(content.heading && content.heading.length));
 
-      /* heading takes markup for line breaks + accent, built safely */
+      /* heading takes markup for line breaks, built safely */
       var heading = frame.querySelector('[data-slot="heading"]');
       heading.textContent = "";
       (content.heading || []).forEach(function (line, i, all) {
         var span = document.createElement("span");
-        if (String(line).charAt(0) === "*") {
-          span.className = "accent";
-          line = String(line).slice(1);
-        }
-        span.textContent = line;
+        span.textContent = String(line).replace(/^\*/, ""); // legacy accent marker, now plain ink
         heading.appendChild(span);
         if (i < all.length - 1) heading.appendChild(document.createElement("br"));
       });

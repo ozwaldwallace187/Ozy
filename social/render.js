@@ -15,7 +15,7 @@
    set JSON: { "variant": "paper", "size": "feed",
                "attribution": "HANNAH & ANGUS", "event": "…",
                "quotes": ["…", "…"], "enquiryUrl": "HAVEYOUMETBABETTE.COM/ENQUIRE" }
-   …or       { "cards": [ { "mode": "announce", "heading": ["NOW","BOOKING","*2027"],
+   …or       { "cards": [ { "mode": "announce", "heading": ["NOW","BOOKING","2027"],
                "sub": "…", "out": "booking.png" } ] }
 
    Uses Playwright's Chromium if installed (local or global),
@@ -150,7 +150,7 @@ function expandSet(config) {
   const cards = [];
   cards.push(Object.assign({}, base, {
     mode: "title",
-    heading: ["IN", "THEIR", "*WORDS"],
+    heading: ["IN", "THEIR", "WORDS"],
     attribution: config.attribution,
     out: "01-title.png",
   }));

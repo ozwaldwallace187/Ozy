@@ -5,7 +5,6 @@
   "title": "Enquire — Babette",
   "metaDescription": "Begin the story. Tell Babette about your wedding, dinner or launch — undone romance, editorial events.",
   "heading": ["BEGIN", "THE", "STORY"],
-  "headingAccent": 2,
   "intro": "Three short pages. Tell us what you’re dreaming of, and we’ll write back within two days.",
   "captureParams": ["theme", "about"],
   "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",

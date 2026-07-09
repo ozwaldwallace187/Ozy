@@ -121,7 +121,6 @@
   margin-left: -0.04em;
 }
 .sc-frame.s-story .sc-heading { font-size: 180px; }
-.sc-heading .accent { color: var(--sc-accent); }
 
 /* the real wordmark — shown on closing cards when no heading is given */
 .sc-logo { display: none; width: 82%; }
@@ -213,9 +212,9 @@
   }
   @media (max-width: 860px) { .st-app { grid-template-columns: 1fr; } }
   .st-h1 {
-    font-family: "Archivo Black", Impact, sans-serif; font-weight: 900;
-    text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.98;
-    font-size: 40px; margin: 0 0 6px;
+    font-family: "Inter", -apple-system, sans-serif; font-weight: 800;
+    text-transform: uppercase; letter-spacing: -0.045em; line-height: 0.9;
+    font-size: 42px; margin: 0 0 6px;
   }
   .st-sub {
     font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-weight: 500;
@@ -296,10 +295,10 @@
     </div>
 
     <div data-modes="title closing announce">
-      <label class="st-label" for="inHeading">Heading — one line per row, * for the red line</label>
+      <label class="st-label" for="inHeading">Heading — one line per row</label>
       <textarea class="st-textarea" id="inHeading">IN
 THEIR
-*WORDS</textarea>
+WORDS</textarea>
     </div>
 
     <div data-modes="closing announce">
@@ -415,16 +414,12 @@ THEIR
       frame.querySelector(".sc-index").style.display = content.index ? "" : "none";
       frame.classList.toggle("has-heading", !!(content.heading && content.heading.length));
 
-      /* heading takes markup for line breaks + accent, built safely */
+      /* heading takes markup for line breaks, built safely */
       var heading = frame.querySelector('[data-slot="heading"]');
       heading.textContent = "";
       (content.heading || []).forEach(function (line, i, all) {
         var span = document.createElement("span");
-        if (String(line).charAt(0) === "*") {
-          span.className = "accent";
-          line = String(line).slice(1);
-        }
-        span.textContent = line;
+        span.textContent = String(line).replace(/^\*/, ""); // legacy accent marker, now plain ink
         heading.appendChild(span);
         if (i < all.length - 1) heading.appendChild(document.createElement("br"));
       });

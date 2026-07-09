@@ -5,7 +5,6 @@
   "title": "Work With Babette — Supplier Intake",
   "metaDescription": "Chefs, florists, makers, musicians — introduce yourself to Babette.",
   "heading": ["JOIN", "THE", "ATELIER"],
-  "headingAccent": 2,
   "intro": "Chefs, florists, makers, musicians, borrowers and builders — we keep a small black book of people who do things properly. Introduce yourself.",
   "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",
   "cc": "sarah@haveyoumetbabette.com",

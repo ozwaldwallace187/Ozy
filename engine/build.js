@@ -203,9 +203,7 @@ function bgmark() {
 }
 
 function masthead(config) {
-  const lines = (config.heading || []).map((line, i) =>
-    config.headingAccent === i ? `<span class="accent">${esc(line)}</span>` : esc(line)
-  ).join("<br>");
+  const lines = (config.heading || []).map((line) => esc(line)).join("<br>");
   const greeting = config.personalization
     ? `<p class="bb-greeting" hidden data-personalize="${attr(config.personalization.param)}">` +
       `${esc(config.personalization.prefix || "For ")}<span class="name"></span>${esc(config.personalization.suffix || " —")}</p>`

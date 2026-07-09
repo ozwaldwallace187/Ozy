@@ -194,7 +194,6 @@ a { color: inherit; }
 
 .bb-masthead { padding: clamp(36px, 8vw, 72px) 0 clamp(24px, 5vw, 48px); }
 .bb-masthead .bb-display { font-size: clamp(46px, 12.5vw, 110px); }
-.bb-masthead .bb-display .accent { color: var(--splash); }
 .bb-intro {
   font-family: var(--font-editorial);
   font-style: italic;

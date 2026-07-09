@@ -6,7 +6,6 @@
   "metaDescription": "Post-event feedback for Babette. Candour welcome.",
   "robots": "noindex,nofollow",
   "heading": ["THE", "AFTER", "WORD"],
-  "headingAccent": 2,
   "intro": "The party’s over; the tablecloths are in the wash. Tell us how it really was — candour is the kindest thing you can give us.",
   "personalization": { "param": "c", "prefix": "For ", "suffix": " —" },
   "captureParams": ["c", "e"],
