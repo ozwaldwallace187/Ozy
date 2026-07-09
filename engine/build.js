@@ -281,7 +281,23 @@ function successTakeover(config) {
   ].join("\n");
 }
 
+/* Every page is fully self-contained: the kit CSS (fonts inlined as data
+   URIs) and the behaviour JS are embedded, so a page renders perfectly
+   wherever it lands — double-clicked, emailed, opened out of a zip. */
+let KIT_CSS_INLINE = null;
+function kitCssInline() {
+  if (KIT_CSS_INLINE) return KIT_CSS_INLINE;
+  let css = fs.readFileSync(path.join(KIT_DIR, "babette.css"), "utf8");
+  css = css.replace(/url\("fonts\/([^"]+)"\)/g, (m, file) => {
+    const b64 = fs.readFileSync(path.join(KIT_DIR, "fonts", file)).toString("base64");
+    return `url(data:font/woff2;base64,${b64})`;
+  });
+  KIT_CSS_INLINE = css;
+  return css;
+}
+
 function shell(config, body) {
+  const js = fs.readFileSync(path.join(KIT_DIR, "babette-forms.js"), "utf8");
   return `<!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -291,12 +307,15 @@ function shell(config, body) {
 <meta name="description" content="${attr(config.metaDescription || "")}">
 <meta name="robots" content="${attr(config.robots || "index,follow")}">
 <link rel="icon" href="data:,">
-<link rel="preload" href="../kit/fonts/CormorantGaramond-Italic-Var.woff2" as="font" type="font/woff2">
-<link rel="preload" href="../kit/fonts/Inter-Var.woff2" as="font" type="font/woff2">
-<link rel="stylesheet" href="../kit/babette.css">
+<style>
+${kitCssInline()}
+</style>
 </head>
 <body class="bb-page">
 ${body}
+<script>
+${js}
+</script>
 </body>
 </html>
 `;
@@ -353,8 +372,7 @@ function buildFormPage(config, file) {
     `</form>`,
     `</main>`,
     footer(config),
-    successTakeover(config),
-    `<script src="../kit/babette-forms.js"></script>`
+    successTakeover(config)
   ].filter(Boolean).join("\n")
    .replace(/__PRIVACY_URL__/g, attr(config.privacyUrl || "#"));
 
