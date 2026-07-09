@@ -69,9 +69,11 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .bb-flame .bb-halo { display: none; } /* the blink reads as motion */
 }
 
 /* ---------- Type voices ---------- */
@@ -136,6 +138,8 @@ a { color: inherit; }
   font-variant-numeric: tabular-nums;
 }
 .bb-status .bb-num { opacity: 0.85; letter-spacing: 0.04em; }
+.bb-step-count { letter-spacing: 0.14em; font-variant-numeric: tabular-nums; }
+.bb-step-count[hidden] { display: none; }
 .bb-dot {
   display: inline-block;
   width: 7px; height: 7px;
@@ -357,7 +361,18 @@ input[type="date"].bb-input { -webkit-appearance: none; appearance: none; min-he
 @media (hover: hover) {
   .bb-card:hover { background: var(--blush); }
 }
-.bb-card.is-selected { background: var(--ink); color: var(--paper); }
+/* colour is earnt by touch: selection floods splash, then settles to ink */
+.bb-card.is-selected {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  animation: bb-card-splash 0.55s var(--ease);
+}
+@keyframes bb-card-splash {
+  0%  { background-color: var(--splash); border-color: var(--splash); color: var(--paper); }
+  55% { background-color: var(--splash); border-color: var(--splash); color: var(--paper); }
+  100% { background-color: var(--ink); border-color: var(--ink); color: var(--paper); }
+}
 .bb-card.is-selected .bb-card-note { opacity: 0.8; }
 .bb-card:has(input:focus-visible) { outline: 2px solid var(--splash); outline-offset: 2px; }
 
@@ -497,6 +512,88 @@ input[type="date"].bb-input { -webkit-appearance: none; appearance: none; min-he
 }
 .bb-form-alert a { color: inherit; }
 .bb-form-alert[hidden] { display: none; }
+
+/* ---------- The candle — ported from the site, greets you after you write ---------- */
+/* border-radius uses !important to punch through the kit's zero-radius reset,
+   exactly like the status dot does. */
+
+.bb-candle {
+  position: relative;
+  width: 34px;
+  margin: 0 auto 46px;
+}
+.bb-candle .bb-pillar {
+  width: 34px;
+  height: 84px;
+  background: var(--ink);
+  border-radius: 4px 4px 0 0 !important;
+  position: relative;
+}
+.bb-candle .bb-pillar::before { /* melted lip */
+  content: "";
+  position: absolute;
+  top: -4px; left: -6%;
+  width: 112%; height: 9px;
+  background: var(--ink);
+  border-radius: 50% 50% 40% 40% / 85% 85% 25% 25% !important;
+}
+.bb-candle .bb-wick {
+  position: absolute;
+  left: 50%; top: -12px;
+  width: 2px; height: 11px;
+  background: var(--ink);
+  transform: translateX(-50%);
+}
+.bb-flame-wrap {
+  position: absolute;
+  left: 50%; top: -11px;
+  transform: translate(-50%, -100%);
+}
+.bb-flame {
+  width: 15px; height: 34px;
+  position: relative;
+  transform-origin: 50% 100%;
+  animation: bb-flick 1.05s ease-in-out infinite;
+}
+.bb-flame .bb-fbody {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  border-radius: 50% 50% 50% 50% / 64% 64% 36% 36% !important;
+}
+.bb-flame .bb-core {
+  position: absolute;
+  left: 50%; bottom: 4px;
+  width: 6px; height: 14px;
+  transform: translateX(-50%);
+  background: var(--paper);
+  border-radius: 50% 50% 50% 50% / 64% 64% 36% 36% !important;
+  animation: bb-coreflick 0.9s ease-in-out infinite;
+}
+.bb-flame .bb-halo {
+  position: absolute;
+  inset: -6px -5px -3px;
+  border: 1px solid var(--ink);
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38% !important;
+  animation: bb-halo 2.3s steps(1) infinite;
+}
+@keyframes bb-flick {
+  0%, 100% { transform: scale(1, 1) rotate(0deg); }
+  22% { transform: scale(0.93, 1.07) rotate(-2.6deg); }
+  48% { transform: scale(1.05, 0.94) rotate(1.8deg); }
+  74% { transform: scale(0.96, 1.04) rotate(-1.2deg); }
+}
+@keyframes bb-coreflick {
+  0%, 100% { transform: translateX(-50%) scale(1, 1); }
+  35% { transform: translateX(-52%) scale(0.86, 1.1); }
+  70% { transform: translateX(-48%) scale(1.1, 0.9); }
+}
+@keyframes bb-halo {
+  0%, 7% { opacity: 1; }
+  8%, 52% { opacity: 0; }
+  53%, 60% { opacity: 1; }
+  61%, 100% { opacity: 0; }
+}
 
 /* ---------- Success takeover ---------- */
 

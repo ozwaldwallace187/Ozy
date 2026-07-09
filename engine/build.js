@@ -180,13 +180,17 @@ function renderField(field, file) {
 
 /* ---------- page shells ---------- */
 
-/* the site's header pair: legend top-left, live status top-right */
-function slate(config) {
+/* the site's header pair: legend top-left, live status top-right.
+   Multi-step forms get a slate-style step counter beside the number. */
+function slate(config, stepCount) {
   const num = config.number ? `Nº ${config.number}` : "";
+  const counter = stepCount > 1
+    ? `<span class="bb-step-count" data-total="${stepCount}">01 / ${String(stepCount).padStart(2, "0")}</span>`
+    : "";
   return [
     `<header class="bb-slate">`,
     `<div class="bb-legend">Babette <em>— ${esc(config.slateLabel).toLowerCase()}</em></div>`,
-    `<div class="bb-status"><span><span class="bb-dot"></span>${esc(num)}</span></div>`,
+    `<div class="bb-status">${counter}<span><span class="bb-dot"></span>${esc(num)}</span></div>`,
     `</header>`
   ].join("\n");
 }
@@ -234,6 +238,10 @@ function successTakeover(config) {
   return [
     `<div class="bb-success" role="status" hidden>`,
     `<div class="bb-success-inner">`,
+    `<div class="bb-candle" aria-hidden="true">`,
+    `<div class="bb-flame-wrap"><div class="bb-flame"><div class="bb-halo"></div><div class="bb-fbody"></div><div class="bb-core"></div></div></div>`,
+    `<div class="bb-pillar"><div class="bb-wick"></div></div>`,
+    `</div>`,
     `<p class="bb-success-slate">Received</p>`,
     `<p class="bb-success-msg">${esc(s.message || "Enchanté. We’ll be in touch within two days.")}</p>`,
     `<div class="bb-gold-rule"></div>`,
@@ -296,7 +304,7 @@ function buildFormPage(config, file) {
   const body = [
     multi ? `<div class="bb-progress" aria-hidden="true"><span></span></div>` : "",
     bgmark(),
-    slate(config),
+    slate(config, steps.length),
     `<main class="bb-main">`,
     masthead(config),
     `<form class="bb-form" novalidate`,

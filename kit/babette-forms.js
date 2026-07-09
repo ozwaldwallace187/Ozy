@@ -49,6 +49,10 @@
     if (progress) {
       progress.style.width = ((current + 1) / steps.length) * 100 + "%";
     }
+    document.querySelectorAll(".bb-step-count").forEach(function (el) {
+      var pad = function (n) { return String(n).padStart(2, "0"); };
+      el.textContent = pad(current + 1) + " / " + pad(steps.length);
+    });
     if (backBtn) backBtn.style.visibility = current === 0 ? "hidden" : "visible";
     var last = current === steps.length - 1;
     if (nextBtn) nextBtn.style.display = last ? "none" : "";
