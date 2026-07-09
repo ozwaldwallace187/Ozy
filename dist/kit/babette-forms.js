@@ -12,6 +12,25 @@
   var loadedAt = Date.now();
   var MIN_HUMAN_MS = 5000;
 
+  /* ---------- intro takeover: the wordmark greets you, once per session ---------- */
+
+  var intro = document.getElementById("bbIntro");
+  if (intro) {
+    var seen = false;
+    try { seen = sessionStorage.getItem("bb-intro-seen") === "1"; } catch (e) {}
+    var noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (seen || noMotion) {
+      intro.remove();
+    } else {
+      intro.hidden = false;
+      try { sessionStorage.setItem("bb-intro-seen", "1"); } catch (e) {}
+      setTimeout(function () {
+        intro.classList.add("lift");
+        setTimeout(function () { intro.remove(); }, 1000);
+      }, 1300);
+    }
+  }
+
   /* ---------- Personalisation (?c=Hannah+%26+Angus) ---------- */
 
   var params = new URLSearchParams(window.location.search);

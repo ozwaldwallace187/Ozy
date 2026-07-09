@@ -23,6 +23,9 @@ const esc = (s) =>
     .replace(/&/g, "&amp;").replace(/</g, "&lt;")
     .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
+/* escape, then honour *emphasis* — the mixed-type statement voice */
+const escEm = (s) => esc(s).replace(/\*([^*]+)\*/g, "<em>$1</em>");
+
 const attr = (s) => esc(s);
 
 let idCounter = 0;
@@ -48,7 +51,7 @@ function renderInput(field) {
   const parts = [`<div class="bb-field"${field.error ? ` data-error="${attr(field.error)}"` : ""}>`];
   parts.push(renderLabel(field, id));
   parts.push(
-    `<input class="bb-input" id="${id}" name="${attr(field.name)}" type="${type}"` +
+    `<input class="bb-input${field.prompt ? " bb-editorial-input" : ""}" id="${id}" name="${attr(field.name)}" type="${type}"` +
     (field.required ? " required" : "") +
     (field.placeholder ? ` placeholder="${attr(field.placeholder)}"` : "") +
     (field.autocomplete ? ` autocomplete="${attr(field.autocomplete)}"` : "") +
@@ -67,7 +70,7 @@ function renderTextarea(field) {
   return [
     `<div class="bb-field">`,
     renderLabel(field, id),
-    `<textarea class="bb-textarea" id="${id}" name="${attr(field.name)}" rows="${field.rows || 3}"` +
+    `<textarea class="bb-textarea${field.prompt ? " bb-editorial-input" : ""}" id="${id}" name="${attr(field.name)}" rows="${field.rows || 3}"` +
       (field.required ? " required" : "") +
       (field.placeholder ? ` placeholder="${attr(field.placeholder)}"` : "") +
       (field.error ? ` data-error="${attr(field.error)}"` : "") +
@@ -216,10 +219,37 @@ function masthead(config) {
     `<section class="bb-masthead">`,
     `<h1 class="bb-display">${lines}</h1>`,
     greeting,
-    config.intro ? `<p class="bb-intro">${esc(config.intro)}</p>` : "",
+    config.intro ? `<p class="bb-intro">${escEm(config.intro)}</p>` : "",
     config.caption ? `<p class="bb-caption">${esc(config.caption)}</p>` : "",
     `</section>`
   ].filter(Boolean).join("\n");
+}
+
+/* the site's bordered address card, top-right on desktop */
+function aside(config) {
+  if (config.aside === false) return "";
+  const a = config.aside || {};
+  const kicker = a.kicker || "Enquiries";
+  const lines = a.lines || [
+    `<a href="mailto:sarah@haveyoumetbabette.com?cc=ozy@haveyoumetbabette.com">sarah@haveyoumetbabette.com</a>`,
+    `London · UK &amp; beyond`,
+  ];
+  return [
+    `<aside class="bb-aside">`,
+    `<p class="kicker">${esc(kicker)}</p>`,
+    lines.join("<br>"),
+    `</aside>`
+  ].join("\n");
+}
+
+/* once-per-session wordmark intro (enquiry only, opt-in via introMark) */
+function introTakeover(config) {
+  if (!config.introMark) return "";
+  return [
+    `<div class="bb-intro-takeover" id="bbIntro" hidden aria-hidden="true">`,
+    `<div class="mark"><svg viewBox="0 0 1244 380" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><use href="#babette-mark"/></svg></div>`,
+    `</div>`
+  ].join("\n");
 }
 
 function footer(config) {
@@ -304,7 +334,9 @@ function buildFormPage(config, file) {
   const body = [
     multi ? `<div class="bb-progress" aria-hidden="true"><span></span></div>` : "",
     bgmark(),
+    introTakeover(config),
     slate(config, steps.length),
+    aside(config),
     `<main class="bb-main">`,
     masthead(config),
     `<form class="bb-form" novalidate`,

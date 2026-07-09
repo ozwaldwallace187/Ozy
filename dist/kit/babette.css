@@ -174,6 +174,61 @@ a { color: inherit; }
 }
 .bb-main, .bb-slate, .bb-foot { position: relative; z-index: 5; }
 
+/* ---------- desktop aside — the site's bordered address card, top-right ---------- */
+
+.bb-aside {
+  display: none;
+  position: fixed;
+  top: 120px;
+  right: var(--gutter);
+  z-index: 6;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 14px 18px;
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  max-width: 230px;
+  background: var(--paper);
+}
+.bb-aside .kicker {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin: 0 0 6px;
+}
+.bb-aside a { text-decoration: none; }
+.bb-aside a:hover { color: var(--splash); }
+@media (min-width: 1100px) {
+  .bb-aside { display: block; }
+}
+
+/* ---------- intro takeover — the wordmark greets you once per session ---------- */
+
+.bb-intro-takeover {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.bb-intro-takeover.lift { transform: translateY(-100%); }
+.bb-intro-takeover[hidden] { display: none; }
+.bb-intro-takeover .mark {
+  width: 100vw;
+  padding: 0 var(--gutter);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: bb-intro-in 1s var(--ease) forwards;
+}
+.bb-intro-takeover .mark svg { width: 100%; height: auto; display: block; color: var(--ink); }
+@keyframes bb-intro-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ---------- Progress rule (multi-step) ---------- */
 
 .bb-progress {
@@ -225,7 +280,8 @@ a { color: inherit; }
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: none; }
 }
-/* step marker — the bordered slate label, straight off the film slate */
+/* step marker — the bordered slate label, straight off the film slate.
+   It blinks once as the step opens, like the FILM TO FOLLOW slate clapping. */
 .bb-step-head {
   display: flex;
   align-items: baseline;
@@ -240,6 +296,12 @@ a { color: inherit; }
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.16em;
+}
+.bb-step.is-active .bb-step-marker { animation: bb-slateblink 1.6s steps(1) 1; }
+@keyframes bb-slateblink {
+  0%, 68% { opacity: 1; }
+  69%, 78% { opacity: 0.25; }
+  79%, 100% { opacity: 1; }
 }
 .bb-step-marker .num { color: var(--splash); margin-right: 2px; }
 
@@ -299,7 +361,18 @@ fieldset.bb-field legend { padding: 0; }
 .bb-field.has-error .bb-input,
 .bb-field.has-error .bb-textarea { border-bottom-color: var(--splash); }
 
-input[type="date"].bb-input { -webkit-appearance: none; appearance: none; min-height: 42px; }
+/* editorial-voiced fields: you answer the italic question in the same voice */
+.bb-input.bb-editorial-input, .bb-textarea.bb-editorial-input {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+input[type="date"].bb-input { -webkit-appearance: none; appearance: none; min-height: 42px; font-variant-numeric: tabular-nums; }
+input[type="date"].bb-input::-webkit-calendar-picker-indicator { opacity: 0.55; cursor: pointer; }
 
 .bb-hint {
   font-size: 12px;
