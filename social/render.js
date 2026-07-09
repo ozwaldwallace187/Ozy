@@ -165,7 +165,7 @@ function expandSet(config) {
   });
   cards.push(Object.assign({}, base, {
     mode: "closing",
-    heading: ["HAVE", "YOU MET", "*BABETTE?"],
+    /* no heading → the closing card shows the real wordmark */
     sub: "Begin your own story —",
     url: config.enquiryUrl || "HAVEYOUMETBABETTE.COM/ENQUIRE",
     kicker: "THE INVITATION",

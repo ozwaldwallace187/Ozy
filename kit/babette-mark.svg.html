@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="en-GB">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Check a Date — Babette</title>
-<meta name="description" content="Two fields. Your date, your email — we’ll reply with availability.">
-<meta name="robots" content="index,follow">
-<link rel="icon" href="data:,">
-<link rel="preload" href="../kit/fonts/CormorantGaramond-Italic-Var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../kit/fonts/Inter-Var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../kit/babette.css">
-</head>
-<body class="bb-page">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="babette-mark" viewBox="0 0 1244 380" style="fill-rule:evenodd;clip-rule:evenodd;"><g transform="matrix(1,0,0,1,-20,-295.680266)">
         <g transform="matrix(1,0,0,1,-0,-309)">
             <g transform="matrix(1.354062,0,0,1.318359,55.000910,-92.719191)">
@@ -37,60 +23,3 @@
             </g>
         </g>
     </g></symbol></svg>
-<div class="bb-bgmark" aria-hidden="true">
-<svg viewBox="0 0 1244 380" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><use href="#babette-mark"/></svg>
-</div>
-<header class="bb-slate">
-<div class="bb-legend">Babette <em>— the date</em></div>
-<div class="bb-status"><span><span class="bb-dot"></span>Nº 004</span></div>
-</header>
-<main class="bb-main">
-<section class="bb-masthead">
-<h1 class="bb-display">IS IT<br><span class="accent">FREE?</span></h1>
-<p class="bb-intro">Your date and your email. We’ll write back with availability — usually the same day.</p>
-</section>
-<form class="bb-form" novalidate
-  data-endpoint="https://formsubmit.co/ajax/ozy@haveyoumetbabette.com"
-  data-subject="Availability request — check a date"
-  data-cc="sarah@haveyoumetbabette.com"
-  data-fallback-email="ozy@haveyoumetbabette.com">
-<p class="bb-form-alert" role="alert" hidden></p>
-<input type="hidden" name="form" value="check-a-date">
-<input type="hidden" name="theme" data-capture-param="theme">
-<input class="bb-hp" type="text" name="bb_website" tabindex="-1" autocomplete="off" aria-hidden="true">
-<section class="bb-step is-active" aria-label="THE ESSENTIALS">
-<header class="bb-step-head"><span class="bb-step-marker"><span class="num">01</span> — THE ESSENTIALS</span></header>
-<div class="bb-field" data-error="We can’t check the diary without a date.">
-<label class="bb-label" for="f_1">Your date <span class="bb-req" aria-hidden="true">*</span></label>
-<input class="bb-input" id="f_1" name="event_date" type="date" required data-error="We can’t check the diary without a date.">
-</div>
-
-<div class="bb-field" data-error="We’ll need an email to reply to you.">
-<label class="bb-label" for="f_2">Your email <span class="bb-req" aria-hidden="true">*</span></label>
-<input class="bb-input" id="f_2" name="email" type="email" required autocomplete="email" data-error="We’ll need an email to reply to you." data-error-format="That email doesn’t look quite right.">
-</div>
-
-<p class="bb-caption">That’s genuinely all. We’ll keep your email only to answer this.</p>
-</section>
-<div class="bb-nav">
-<span></span>
-<button type="submit" class="bb-btn bb-submit">Check it</button>
-</div>
-</form>
-</main>
-<footer class="bb-foot">
-<p class="bb-signoff">Have You Met Babette?</p>
-<nav class="bb-foot-links"><a class="bb-wick" href="https://haveyoumetbabette.com">haveyoumetbabette.com</a>
-<a class="bb-wick" href="https://haveyoumetbabette.com/privacy">Privacy</a></nav>
-</footer>
-<div class="bb-success" role="status" hidden>
-<div class="bb-success-inner">
-<p class="bb-success-slate">Received</p>
-<p class="bb-success-msg">Checking the diary. You’ll hear from us shortly.</p>
-<div class="bb-gold-rule"></div>
-<p class="bb-success-sub">HAVE YOU MET BABETTE?</p>
-</div>
-</div>
-<script src="../kit/babette-forms.js"></script>
-</body>
-</html>

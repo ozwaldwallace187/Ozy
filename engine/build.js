@@ -180,16 +180,25 @@ function renderField(field, file) {
 
 /* ---------- page shells ---------- */
 
+/* the site's header pair: legend top-left, live status top-right */
 function slate(config) {
   const num = config.number ? `Nº ${config.number}` : "";
   return [
     `<header class="bb-slate">`,
-    `<div class="bb-slate-row">`,
-    `<span>BABETTE</span>`,
-    `<span><span class="bb-slash">/</span>&nbsp; ${esc(config.slateLabel)} &nbsp;<span class="bb-slash">/</span></span>`,
-    `<span>${esc(num)}</span>`,
-    `</div>`,
+    `<div class="bb-legend">Babette <em>— ${esc(config.slateLabel).toLowerCase()}</em></div>`,
+    `<div class="bb-status"><span><span class="bb-dot"></span>${esc(num)}</span></div>`,
     `</header>`
+  ].join("\n");
+}
+
+/* the site's fixed background wordmark + the shared SVG symbol it uses */
+const MARK_SYMBOL = fs.readFileSync(path.join(KIT_DIR, "babette-mark.svg.html"), "utf8").trim();
+function bgmark() {
+  return [
+    MARK_SYMBOL,
+    `<div class="bb-bgmark" aria-hidden="true">`,
+    `<svg viewBox="0 0 1244 380" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><use href="#babette-mark"/></svg>`,
+    `</div>`
   ].join("\n");
 }
 
@@ -212,8 +221,8 @@ function masthead(config) {
 }
 
 function footer(config) {
-  const links = [`<a href="${attr(config.privacyUrl || "#")}">Privacy</a>`];
-  if (config.homeUrl) links.unshift(`<a href="${attr(config.homeUrl)}">haveyoumetbabette.com</a>`);
+  const links = [`<a class="bb-wick" href="${attr(config.privacyUrl || "#")}">Privacy</a>`];
+  if (config.homeUrl) links.unshift(`<a class="bb-wick" href="${attr(config.homeUrl)}">haveyoumetbabette.com</a>`);
   return [
     `<footer class="bb-foot">`,
     `<p class="bb-signoff">Have You Met Babette?</p>`,
@@ -227,7 +236,7 @@ function successTakeover(config) {
   return [
     `<div class="bb-success" role="status" hidden>`,
     `<div class="bb-success-inner">`,
-    `<p class="bb-success-slate">BABETTE <span class="bb-slash" style="color:var(--splash)">/</span> RECEIVED</p>`,
+    `<p class="bb-success-slate">Received</p>`,
     `<p class="bb-success-msg">${esc(s.message || "Enchanté. We’ll be in touch within two days.")}</p>`,
     `<div class="bb-gold-rule"></div>`,
     `<p class="bb-success-sub">${esc(s.sub || "HAVE YOU MET BABETTE?")}</p>`,
@@ -238,7 +247,7 @@ function successTakeover(config) {
 
 function shell(config, body) {
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -288,6 +297,7 @@ function buildFormPage(config, file) {
 
   const body = [
     multi ? `<div class="bb-progress" aria-hidden="true"><span></span></div>` : "",
+    bgmark(),
     slate(config),
     `<main class="bb-main">`,
     masthead(config),
@@ -325,6 +335,7 @@ function buildLinksPage(config) {
   ).join("\n");
 
   const body = [
+    bgmark(),
     slate(config),
     `<main class="bb-main">`,
     masthead(config),
@@ -353,6 +364,7 @@ function buildIndex(entries) {
     intro: "Every page in the system. Internal directory — not for the public.",
   };
   const body = [
+    bgmark(),
     slate(config),
     `<main class="bb-main">`,
     masthead(config),
@@ -435,7 +447,6 @@ function buildInlineFontsCss() {
   const font = (file) =>
     fs.readFileSync(path.join(KIT_DIR, "fonts", file)).toString("base64");
   return `
-@font-face{font-family:"Archivo Black";src:url(data:font/woff2;base64,${font("ArchivoBlack-400.woff2")}) format("woff2");font-weight:400;font-display:block;}
 @font-face{font-family:"Cormorant Garamond";src:url(data:font/woff2;base64,${font("CormorantGaramond-Italic-Var.woff2")}) format("woff2");font-style:italic;font-weight:300 700;font-display:block;}
 @font-face{font-family:"Inter";src:url(data:font/woff2;base64,${font("Inter-Var.woff2")}) format("woff2");font-weight:100 900;font-display:block;}
 `;

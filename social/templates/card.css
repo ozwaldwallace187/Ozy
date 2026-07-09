@@ -41,24 +41,39 @@
 .sc-frame.v-blush { --sc-bg: var(--sc-blush); }
 .sc-frame.v-gold  { --sc-accent: var(--sc-gold); }
 
-/* ---------- slate header ---------- */
+/* ---------- slate header: bordered label (film-slate) + tabular index ---------- */
 
 .sc-slate {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: 30px;
-  border-top: 2px solid var(--sc-fg);
-  border-bottom: 2px solid var(--sc-fg);
-  padding: 22px 0;
-  font-size: 21px;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.28em;
-  white-space: nowrap;
   flex: none;
 }
-.sc-slate .slash { color: var(--sc-accent); }
+.sc-slate .sc-tag {
+  display: inline-block;
+  border: 2px solid var(--sc-fg);
+  padding: 14px 26px;
+  font-size: 22px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+}
+.sc-slate .sc-index {
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+.sc-slate .sc-index .dot {
+  display: inline-block;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--sc-splash);
+  margin-right: 14px;
+}
 
 /* ---------- body ---------- */
 
@@ -74,30 +89,36 @@
 .sc-quote {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 88px;
-  line-height: 1.22;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   overflow: hidden;
 }
-.sc-frame.v-gold .sc-quote::first-letter { color: inherit; }
 
 .sc-heading {
-  font-family: "Druk Wide Trial", "Archivo Black", Impact, sans-serif;
-  font-weight: 900;
+  font-family: "Inter", -apple-system, sans-serif;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
-  line-height: 0.98;
-  font-size: 122px;
+  letter-spacing: -0.045em;
+  line-height: 0.87;
+  font-size: 168px;
+  margin-left: -0.04em;
 }
-.sc-frame.s-story .sc-heading { font-size: 130px; }
+.sc-frame.s-story .sc-heading { font-size: 180px; }
 .sc-heading .accent { color: var(--sc-accent); }
+
+/* the real wordmark — shown on closing cards when no heading is given */
+.sc-logo { display: none; width: 82%; }
+.sc-logo svg { width: 100%; height: auto; display: block; fill: currentColor; }
 
 .sc-sub {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
-  font-weight: 500;
-  font-size: 44px;
-  line-height: 1.35;
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
   margin-top: 54px;
   max-width: 20em;
 }
@@ -112,25 +133,25 @@
   margin-bottom: 40px;
 }
 .sc-attribution {
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.16em;
   line-height: 1.5;
 }
 .sc-event {
+  font-size: 20px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-top: 12px;
+  opacity: 0.66;
+}
+.sc-url {
   font-size: 19px;
   font-weight: 300;
   text-transform: uppercase;
-  letter-spacing: 0.28em;
-  margin-top: 12px;
-  opacity: 0.72;
-}
-.sc-url {
-  font-size: 17px;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.16em;
   margin-top: 44px;
   opacity: 0.66;
 }
@@ -145,3 +166,7 @@
 .sc-frame.m-closing  .sc-quote    { display: none; }
 .sc-frame.m-closing  .sc-rule     { background: var(--sc-gold); }
 .sc-frame.m-announce .sc-quote    { display: none; }
+
+/* closing card with no heading lines → show the real wordmark instead */
+.sc-frame.m-closing:not(.has-heading) .sc-logo { display: block; }
+.sc-frame.m-closing:not(.has-heading) .sc-heading { display: none; }

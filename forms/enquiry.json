@@ -7,7 +7,7 @@
   "heading": ["BEGIN", "THE", "STORY"],
   "headingAccent": 2,
   "intro": "Three short pages. Tell us what you’re dreaming of, and we’ll write back within two days.",
-  "captureParams": ["theme"],
+  "captureParams": ["theme", "about"],
   "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",
   "cc": "sarah@haveyoumetbabette.com",
   "subject": "New enquiry — haveyoumetbabette.com",

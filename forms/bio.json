@@ -11,10 +11,10 @@
   "privacyUrl": "https://haveyoumetbabette.com/privacy",
   "homeUrl": "https://haveyoumetbabette.com",
   "links": [
-    { "title": "ENQUIRE", "note": "begin the story — three short pages", "href": "../enquire/" },
-    { "title": "CHECK A DATE", "note": "two fields, one quick answer", "href": "../check-a-date/" },
-    { "title": "THE PACKAGES", "note": "Silhouette to Antoinette", "href": "https://haveyoumetbabette.com/#packages" },
-    { "title": "IN THEIR WORDS", "note": "what the tables say afterwards", "href": "https://haveyoumetbabette.com/#words" },
-    { "title": "PRESS & COLLABORATION", "note": "features, shoots, borrowed tablescapes", "href": "../press/" }
+    { "title": "Enquire", "note": "begin the story — three short pages", "href": "../enquire/" },
+    { "title": "Check a date", "note": "two fields, one quick answer", "href": "../check-a-date/" },
+    { "title": "The packages", "note": "Silhouette to Antoinette", "href": "https://haveyoumetbabette.com/#packages" },
+    { "title": "In their words", "note": "what the tables say afterwards", "href": "https://haveyoumetbabette.com/#words" },
+    { "title": "Press & collaboration", "note": "features, shoots, borrowed tablescapes", "href": "../press/" }
   ]
 }

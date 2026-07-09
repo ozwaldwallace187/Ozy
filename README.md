@@ -98,13 +98,17 @@ Announcement cards (`--mode announce --heading "NOW|BOOKING|*2027"`) come from
 the same templates — `*` marks the splash-red line. Requires `playwright`
 (or `puppeteer-core` + `CHROME_PATH`) — the templates and studio need nothing.
 
-## Fonts
+## Fonts & design provenance
 
-Cormorant Garamond (italic, variable), Inter (variable) and Archivo Black are
-self-hosted in `kit/fonts/`. Archivo Black stands in for **Druk Wide Trial**;
-if you have the licensed Druk woff2, drop it in as
-`kit/fonts/DrukWideTrial-Heavy.woff2` and rebuild — the kit picks it up
-automatically, no CSS changes.
+The kit mirrors `babette-artworld.html` (the live site build) exactly: Inter
+300/400 in the Graphik role (negative tracking), **Inter 800** in the InterD
+display role (giant cropped uppercase), Cormorant Garamond italic in the
+Cardinal Fruit role. Both faces are self-hosted as variable fonts in
+`kit/fonts/`. The header pair (legend + blinking-dot status), the bordered
+film-slate labels, the wick-catch underlines and the fixed background
+wordmark (`kit/babette-mark.svg.html`, the site's own `#babette-mark` SVG)
+are lifted straight from that build. Blush and gold are suite-only
+extensions for hover fills and success states.
 
 ## Acceptance criteria
 
