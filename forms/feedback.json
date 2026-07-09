@@ -3,10 +3,10 @@
   "number": "003",
   "slateLabel": "AFTERWORD",
   "title": "The Afterword — Babette",
-  "metaDescription": "Post-event feedback for Babette. Candour welcome.",
+  "metaDescription": "Post-event feedback for Babette. Candour welcome. Long answers are a gift.",
   "robots": "noindex,nofollow",
   "heading": ["THE", "AFTER", "WORD"],
-  "intro": "The party’s over; the tablecloths are in the wash. Tell us how it really was — candour is the kindest thing you can give us.",
+  "intro": "The party’s over; the tablecloths are in the wash. Tell us how it really was — and don’t be brief on our account. Long answers are a gift: the more you tell us, the better we get.",
   "personalization": { "param": "c", "prefix": "For ", "suffix": " —" },
   "captureParams": ["c", "e"],
   "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",
@@ -17,12 +17,12 @@
   "homeUrl": "https://haveyoumetbabette.com",
   "submitLabel": "Send the afterword",
   "success": {
-    "message": "Read, noted, taken to heart. Thank you for telling us straight.",
+    "message": "Read, noted, taken to heart. Thank you for telling us straight — every word of it.",
     "sub": "HAVE YOU MET BABETTE?"
   },
   "steps": [
     {
-      "marker": "HOW IT WAS",
+      "marker": "THE DAY",
       "fields": [
         {
           "kind": "text",
@@ -46,17 +46,60 @@
         },
         {
           "kind": "textarea",
-          "name": "best_moment",
+          "name": "first_image",
+          "label": "Close your eyes. What’s the first image of the day that comes back?",
+          "prompt": true,
+          "required": true,
+          "rows": 4,
+          "placeholder": "Start anywhere — the light, a face, a plate, a song…",
+          "hint": "Ramble freely. We read every word, twice.",
+          "error": "Give us one picture — however small."
+        },
+        {
+          "kind": "textarea",
+          "name": "guests_talked_about",
+          "label": "What did your guests not stop talking about?",
+          "prompt": true,
+          "rows": 4,
+          "placeholder": "The thing people mentioned in the taxi home, or texted you about the morning after…"
+        },
+        {
+          "kind": "textarea",
+          "name": "best_decision",
           "label": "What was the best decision we made together?",
           "prompt": true,
-          "rows": 3
-        },
+          "rows": 4,
+          "placeholder": "And what nearly talked you out of it…"
+        }
+      ]
+    },
+    {
+      "marker": "THE CANDOUR",
+      "fields": [
         {
           "kind": "textarea",
           "name": "do_differently",
           "label": "And honestly — what should we have done differently?",
           "prompt": true,
-          "rows": 3
+          "rows": 5,
+          "placeholder": "Spare nothing. This is the part we read most carefully…",
+          "hint": "Candour is the kindest thing you can give us."
+        },
+        {
+          "kind": "textarea",
+          "name": "wobble",
+          "label": "Was there a moment things wobbled — and how did we catch it?",
+          "prompt": true,
+          "rows": 4,
+          "placeholder": "Every event has one. We’d rather hear about ours…"
+        },
+        {
+          "kind": "textarea",
+          "name": "in_a_sentence",
+          "label": "If you described Babette to a stranger in one sentence — what would you say?",
+          "prompt": true,
+          "rows": 3,
+          "placeholder": "Exactly as you’d say it out loud, wine in hand…"
         },
         {
           "kind": "cards",
@@ -73,8 +116,12 @@
         {
           "kind": "check",
           "name": "testimonial_invite",
-          "text": "You may write to me about sharing a few words publicly.",
+          "text": "You may write to me about sharing a few of these words publicly.",
           "value": "Open to testimonial invite"
+        },
+        {
+          "kind": "note",
+          "text": "Nothing here is published anywhere — this page is for our eyes only, unless you tick the box above and we come to an agreement together."
         }
       ]
     }
