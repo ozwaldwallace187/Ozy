@@ -379,6 +379,102 @@ function buildFormPage(config, file) {
   return shell(config, body);
 }
 
+/* ---------- shop page (Assiette) ---------- */
+
+function renderPlate(product, i) {
+  const sold = product.state === "sold";
+  const num = `Nº ${String(i + 1).padStart(2, "0")}`;
+  const tag = sold ? "SOLD" : (product.tag || "ONE OF ONE");
+  const media = product.img
+    ? `<img src="${attr(product.img)}" alt="${attr(product.name)}" loading="lazy" decoding="async">`
+    : `<div class="bb-plate-slot"><span>Image to follow</span></div>`;
+  const meta = [product.origin, product.era, product.details].filter(Boolean)
+    .map((m) => `<span>${esc(m)}</span>`).join("");
+  const action = sold
+    ? `<span class="bb-plate-claim">Gone to a good table</span>`
+    : product.buyUrl
+      ? `<a class="bb-plate-claim" href="${attr(product.buyUrl)}">Buy it →</a>`
+      : `<button type="button" class="bb-plate-claim" data-claim="${attr(product.name)}">Claim it →</button>`;
+  return [
+    `<article class="bb-plate${sold ? " is-sold" : ""}" data-cat="${attr((product.category || "").toLowerCase())}">`,
+    `<div class="bb-plate-frame">`,
+    `<span class="bb-plate-num">${num}</span>`,
+    media,
+    `<span class="bb-plate-tag">${esc(tag)}</span>`,
+    `</div>`,
+    `<div class="bb-plate-cap">`,
+    `<h3 class="bb-plate-name">${esc(product.name)}</h3>`,
+    product.story ? `<p class="bb-plate-story">${esc(product.story)}</p>` : "",
+    meta ? `<div class="bb-plate-meta">${meta}</div>` : "",
+    `<div class="bb-plate-row">`,
+    `<span class="bb-plate-price">${esc(product.price || "")}</span>`,
+    action,
+    `</div>`,
+    `</div>`,
+    `</article>`
+  ].filter(Boolean).join("\n");
+}
+
+function buildShopPage(config, file) {
+  const products = config.products || [];
+  const categories = [...new Set(products.map((p) => p.category).filter(Boolean))];
+
+  const filters = [
+    `<div class="bb-shop-filters" role="group" aria-label="Filter plates">`,
+    `<button type="button" data-filter="all" aria-pressed="true">All</button>`,
+    ...categories.map((c) =>
+      `<button type="button" data-filter="${attr(c.toLowerCase())}" aria-pressed="false">${esc(c)}</button>`),
+    `</div>`
+  ].join("\n");
+
+  const grid = `<div class="bb-shop-grid">\n${products.map(renderPlate).join("\n\n")}\n</div>`;
+
+  const reserveFields = (config.reserveFields || [
+    { kind: "text", name: "plate", label: "The plate", required: true,
+      placeholder: "Tap ‘Claim it’ above — or write its name here",
+      error: "Which plate has your heart?" },
+    { kind: "text", name: "names", label: "Your name", required: true, autocomplete: "name",
+      error: "So we know who’s claiming it." },
+    { kind: "email", name: "email", label: "Email", required: true, autocomplete: "email",
+      error: "We’ll need an email to confirm it’s yours.",
+      errorFormat: "That email doesn’t look quite right." },
+    { kind: "check", name: "crate_alert", value: "Yes — next crate",
+      text: "Tell me when the next crate lands from France." }
+  ]).map((f) => renderField(f, file)).join("\n\n");
+
+  const body = [
+    bgmark(),
+    slate(config),
+    aside(config),
+    `<main class="bb-main">`,
+    masthead(config),
+    filters,
+    grid,
+    `<section class="bb-shop-form-head">`,
+    `<header class="bb-step-head"><span class="bb-step-marker"><span class="num">✳</span> ${esc(config.reserveMarker || "RESERVE A PLATE")}</span></header>`,
+    config.reserveIntro ? `<p class="bb-intro" style="margin:0 0 30px">${escEm(config.reserveIntro)}</p>` : "",
+    `<form class="bb-form" novalidate`,
+    `  data-endpoint="${attr(config.endpoint || "")}"`,
+    `  data-subject="${attr(config.subject || config.title)}"`,
+    config.cc ? `  data-cc="${attr(config.cc)}"` : "",
+    `  data-fallback-email="${attr(config.fallbackEmail || "ozy@haveyoumetbabette.com")}">`,
+    `<p class="bb-form-alert" role="alert" hidden></p>`,
+    `<input type="hidden" name="form" value="${attr(config.slug)}">`,
+    `<input class="bb-hp" type="text" name="bb_website" tabindex="-1" autocomplete="off" aria-hidden="true">`,
+    `<section class="bb-step is-active">`,
+    reserveFields,
+    `</section>`,
+    `<div class="bb-nav"><span></span><button type="submit" class="bb-btn bb-submit">${esc(config.submitLabel || "Hold it for me")}</button></div>`,
+    `</form>`,
+    `</section>`,
+    `</main>`,
+    footer(config),
+    successTakeover(config)
+  ].filter(Boolean).join("\n");
+
+  return shell(config, body);
+}
+
 /* ---------- links (bio hub) page ---------- */
 
 function buildLinksPage(config) {
@@ -462,7 +558,10 @@ function main() {
     }
     if (!config.slug || !config.title) { fail(file, "config needs slug + title"); continue; }
 
-    const html = config.type === "links" ? buildLinksPage(config) : buildFormPage(config, file);
+    const html =
+      config.type === "links" ? buildLinksPage(config) :
+      config.type === "shop" ? buildShopPage(config, file) :
+      buildFormPage(config, file);
     const dir = path.join(DIST, config.slug);
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, "index.html"), html);

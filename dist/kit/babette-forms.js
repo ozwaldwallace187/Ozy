@@ -50,6 +50,39 @@
     if (value) input.value = value;
   });
 
+  /* ---------- Assiette: category filters + claim → reserve ---------- */
+
+  var shopGrid = document.querySelector(".bb-shop-grid");
+  if (shopGrid) {
+    var filterBox = document.querySelector(".bb-shop-filters");
+    if (filterBox) {
+      filterBox.addEventListener("click", function (e) {
+        var btn = e.target.closest("button");
+        if (!btn) return;
+        var want = btn.getAttribute("data-filter");
+        filterBox.querySelectorAll("button").forEach(function (b) {
+          b.setAttribute("aria-pressed", String(b === btn));
+        });
+        shopGrid.querySelectorAll(".bb-plate").forEach(function (plate) {
+          plate.classList.toggle("filtered-out",
+            want !== "all" && plate.getAttribute("data-cat") !== want);
+        });
+      });
+    }
+    shopGrid.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-claim]");
+      if (!btn) return;
+      var plateInput = document.querySelector('.bb-form input[name="plate"]');
+      if (!plateInput) return;
+      plateInput.value = btn.getAttribute("data-claim");
+      clearError(plateInput.closest(".bb-field"));
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      plateInput.closest(".bb-form").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+      var nameInput = document.querySelector('.bb-form input[name="names"]');
+      if (nameInput) nameInput.focus({ preventScroll: true });
+    });
+  }
+
   if (!form) return;
 
   /* ---------- Steps & progress ---------- */

@@ -1,0 +1,112 @@
+{
+  "type": "shop",
+  "slug": "assiette",
+  "number": "008",
+  "slateLabel": "ASSIETTE",
+  "title": "Babette Assiette — Plates from France",
+  "metaDescription": "One-of-one plates and tableware, found in France, sold from the Babette table. When they’re gone, they’re gone.",
+  "robots": "noindex,nofollow",
+  "heading": ["BABETTE", "ASSIETTE"],
+  "intro": "Plates we found in France and couldn’t leave behind. Brocantes, farmhouse kitchens, the odd château clearance — carried home, washed by hand, sold one by one. When a plate is gone, it’s gone.",
+  "caption": "Assiette — French for plate. Prices include UK postage. Sets sold whole.",
+  "endpoint": "https://formsubmit.co/ajax/ozy@haveyoumetbabette.com",
+  "cc": "sarah@haveyoumetbabette.com",
+  "subject": "Assiette — plate claimed",
+  "fallbackEmail": "ozy@haveyoumetbabette.com",
+  "privacyUrl": "https://haveyoumetbabette.com/privacy",
+  "homeUrl": "https://haveyoumetbabette.com",
+  "submitLabel": "Hold it for me",
+  "reserveMarker": "RESERVE A PLATE",
+  "reserveIntro": "Plates go to whoever writes first. Tell us which one, and we’ll reply within the day with payment details and a posting date.",
+  "success": {
+    "message": "Held. We’ll write within the day — first come, first served, and you came first.",
+    "sub": "BABETTE ASSIETTE"
+  },
+  "products": [
+    {
+      "name": "The Limoges Eight",
+      "story": "A full dinner service from a house outside Limoges — gilt edges softened by a century of Sunday lunches.",
+      "origin": "Limoges",
+      "era": "c. 1920",
+      "details": "Set of 8 · Ø 25 cm",
+      "price": "£180",
+      "category": "Dinner",
+      "state": "available",
+      "tag": "SET OF 8"
+    },
+    {
+      "name": "Café des Sports",
+      "story": "Bistro-ware from a shuttered café in Béziers, the name still printed under the glaze.",
+      "origin": "Béziers",
+      "era": "c. 1950",
+      "details": "Set of 6 · Ø 23 cm",
+      "price": "£120",
+      "category": "Dinner",
+      "state": "available",
+      "tag": "SET OF 6"
+    },
+    {
+      "name": "The Barbotine Cabbage",
+      "story": "A majolica cabbage-leaf server, absurd and magnificent. The centre of any table it lands on.",
+      "origin": "Sarreguemines",
+      "era": "c. 1890",
+      "details": "One piece · 34 cm",
+      "price": "£95",
+      "category": "Serving",
+      "state": "available"
+    },
+    {
+      "name": "Faïence de Gien, Mismatched",
+      "story": "Six dessert plates, no two alike, all singing the same blue. Collected one market at a time.",
+      "origin": "Gien",
+      "era": "1900–1940",
+      "details": "Set of 6 · Ø 19 cm",
+      "price": "£110",
+      "category": "Dessert",
+      "state": "available",
+      "tag": "SET OF 6"
+    },
+    {
+      "name": "The Oyster Dozen",
+      "story": "Two majolica oyster plates the colour of the Étang de Thau at low tide.",
+      "origin": "Longchamp",
+      "era": "c. 1930",
+      "details": "Pair · Ø 24 cm",
+      "price": "£85",
+      "category": "Oddities",
+      "state": "sold"
+    },
+    {
+      "name": "Grand Plat de Mariage",
+      "story": "A serving platter painted for a wedding we know nothing about — initials E & C, forever.",
+      "origin": "Provence",
+      "era": "c. 1900",
+      "details": "One piece · 41 cm",
+      "price": "£140",
+      "category": "Serving",
+      "state": "available"
+    },
+    {
+      "name": "The Absinthe Saucers",
+      "story": "Five café saucers with the price of a pour baked into the rim. Coasters with a past.",
+      "origin": "Paris",
+      "era": "c. 1910",
+      "details": "Set of 5 · Ø 12 cm",
+      "price": "£60",
+      "category": "Oddities",
+      "state": "available",
+      "tag": "SET OF 5"
+    },
+    {
+      "name": "Digoin Confiture Pots",
+      "story": "Stoneware jam pots, still faintly sweet. Pencils, spoons, single stems — they hold anything beautifully.",
+      "origin": "Digoin",
+      "era": "c. 1940",
+      "details": "Set of 3 · 9 cm",
+      "price": "£45",
+      "category": "Oddities",
+      "state": "available",
+      "tag": "SET OF 3"
+    }
+  ]
+}

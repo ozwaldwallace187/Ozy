@@ -766,6 +766,179 @@ input[type="date"].bb-input::-webkit-calendar-picker-indicator { opacity: 0.55; 
 }
 .bb-link-arrow { flex: none; font-size: 13px; }
 
+/* ---------- Assiette — the shop language ---------- */
+
+.bb-shop-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 34px;
+}
+.bb-shop-filters button {
+  font-family: var(--font-utility);
+  font-weight: 400;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 9px 13px;
+  cursor: pointer;
+  transition: background-color 0.18s var(--ease), color 0.18s var(--ease);
+}
+@media (hover: hover) { .bb-shop-filters button:hover { background: var(--blush); } }
+.bb-shop-filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.bb-shop-filters button:focus-visible { outline: 2px solid var(--splash); outline-offset: 2px; }
+
+.bb-shop-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 44px 20px;
+  margin-bottom: 56px;
+}
+@media (min-width: 560px) { .bb-shop-grid { grid-template-columns: 1fr 1fr; } }
+
+.bb-plate.filtered-out { display: none; }
+
+.bb-plate-frame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: var(--hairline);
+  background: var(--paper);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bb-plate-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.04) contrast(1.05) brightness(1.01); /* the ink floor */
+}
+/* the site's crossed "image to follow" slot */
+.bb-plate-slot {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bb-plate-slot::before, .bb-plate-slot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top right, transparent calc(50% - 0.5px), rgba(0,0,0,0.18) 50%, transparent calc(50% + 0.5px));
+}
+.bb-plate-slot::after { transform: scaleX(-1); }
+.bb-plate-slot span {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  border: var(--hairline);
+  padding: 6px 12px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.bb-plate-num {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 2;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--splash);
+  font-variant-numeric: tabular-nums;
+  background: var(--paper);
+  padding: 2px 6px;
+}
+.bb-plate-tag {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 2;
+  border: var(--hairline);
+  background: var(--paper);
+  padding: 5px 10px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+.bb-plate.is-sold .bb-plate-tag { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.bb-plate.is-sold .bb-plate-frame img { filter: saturate(0.15) contrast(1.02) brightness(1.04); }
+
+.bb-plate-cap { padding-top: 14px; }
+.bb-plate-name {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+}
+.bb-plate-story {
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: var(--track-body);
+  opacity: 0.75;
+  margin: 0 0 10px;
+}
+.bb-plate-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.6;
+  margin-bottom: 12px;
+}
+.bb-plate-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-top: var(--hairline);
+  padding-top: 12px;
+}
+.bb-plate-price {
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.bb-plate.is-sold .bb-plate-price { text-decoration: line-through; opacity: 0.45; }
+.bb-plate-claim {
+  font-family: var(--font-utility);
+  font-weight: 400;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border: var(--hairline);
+  background: transparent;
+  color: var(--ink);
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background-color 0.18s var(--ease), color 0.18s var(--ease), border-color 0.18s var(--ease);
+}
+@media (hover: hover) {
+  .bb-plate-claim:hover { background: var(--splash); border-color: var(--splash); color: var(--paper); }
+}
+.bb-plate-claim:focus-visible { outline: 2px solid var(--splash); outline-offset: 2px; }
+.bb-plate.is-sold .bb-plate-claim { border-style: dashed; opacity: 0.55; cursor: default; pointer-events: none; }
+
+/* the reserve counter (shop) sits in a slate box above the form */
+.bb-shop-form-head {
+  border-top: var(--hairline);
+  padding-top: 40px;
+}
+
 /* ---------- Dist index (internal) ---------- */
 
 .bb-index-list { list-style: none; margin: 0; padding: 0; border-top: var(--hairline); }
@@ -844,14 +1017,14 @@ input[type="date"].bb-input::-webkit-calendar-picker-indicator { opacity: 0.55; 
 <label class="bb-card"><input type="radio" name="event_type" value="Wedding"><span class="bb-card-title">Wedding</span><span class="bb-card-note">a whole world, built for a day</span></label>
 <label class="bb-card"><input type="radio" name="event_type" value="Dinner Party"><span class="bb-card-title">Dinner Party</span><span class="bb-card-note">one long table, done properly</span></label>
 <label class="bb-card"><input type="radio" name="event_type" value="Brand or Launch"><span class="bb-card-title">Brand or Launch</span><span class="bb-card-note">editorial, not corporate</span></label>
-<label class="bb-card" data-reveals="#reveal_3"><input type="radio" name="event_type" value="Something Else"><span class="bb-card-title">Something Else</span><span class="bb-card-note">surprise us</span></label>
+<label class="bb-card" data-reveals="#reveal_6"><input type="radio" name="event_type" value="Something Else"><span class="bb-card-title">Something Else</span><span class="bb-card-note">surprise us</span></label>
 </div>
-<div class="bb-reveal" id="reveal_3" hidden><input class="bb-input" name="event_type_detail" type="text" placeholder="Tell us what you’re plotting…" aria-label="Tell us what you’re plotting"></div>
+<div class="bb-reveal" id="reveal_6" hidden><input class="bb-input" name="event_type_detail" type="text" placeholder="Tell us what you’re plotting…" aria-label="Tell us what you’re plotting"></div>
 </fieldset>
 
 <div class="bb-field" data-error="Give us a date — or tick the box below and stay loose.">
-<label class="bb-label" for="f_4">The date, if you have one <span class="bb-req" aria-hidden="true">*</span></label>
-<input class="bb-input" id="f_4" name="event_date" type="date" required data-required-unless="date_flexible" data-error="Give us a date — or tick the box below and stay loose.">
+<label class="bb-label" for="f_7">The date, if you have one <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_7" name="event_date" type="date" required data-required-unless="date_flexible" data-error="Give us a date — or tick the box below and stay loose.">
 </div>
 
 <div class="bb-field">
@@ -866,9 +1039,9 @@ input[type="date"].bb-input::-webkit-calendar-picker-indicator { opacity: 0.55; 
 <legend class="bb-label">Where does it happen? <span class="bb-req" aria-hidden="true">*</span></legend>
 <div class="bb-card-grid">
 <label class="bb-card"><input type="radio" name="location" value="La Belle Éco (Aude)"><span class="bb-card-title">La Belle Éco (Aude)</span><span class="bb-card-note">our house in the South of France</span></label>
-<label class="bb-card" data-reveals="#reveal_5"><input type="radio" name="location" value="Elsewhere"><span class="bb-card-title">Elsewhere</span><span class="bb-card-note">we travel</span></label>
+<label class="bb-card" data-reveals="#reveal_8"><input type="radio" name="location" value="Elsewhere"><span class="bb-card-title">Elsewhere</span><span class="bb-card-note">we travel</span></label>
 </div>
-<div class="bb-reveal" id="reveal_5" hidden><input class="bb-input" name="location_detail" type="text" placeholder="Where were you thinking?" aria-label="Where were you thinking?"></div>
+<div class="bb-reveal" id="reveal_8" hidden><input class="bb-input" name="location_detail" type="text" placeholder="Where were you thinking?" aria-label="Where were you thinking?"></div>
 </fieldset>
 
 <p class="bb-caption">Babette is location-agnostic — we build worlds wherever the table is.</p>
@@ -898,8 +1071,8 @@ input[type="date"].bb-input::-webkit-calendar-picker-indicator { opacity: 0.55; 
 </fieldset>
 
 <div class="bb-field">
-<label class="bb-label bb-prompt" for="f_6">Tell us the feeling. A film, a table, a season, a memory — anything.</label>
-<textarea class="bb-textarea bb-editorial-input" id="f_6" name="the_feeling" rows="4" placeholder="Late August. Candlelight on linen. Everyone stayed too long…"></textarea>
+<label class="bb-label bb-prompt" for="f_9">Tell us the feeling. A film, a table, a season, a memory — anything.</label>
+<textarea class="bb-textarea bb-editorial-input" id="f_9" name="the_feeling" rows="4" placeholder="Late August. Candlelight on linen. Everyone stayed too long…"></textarea>
 </div>
 
 <fieldset class="bb-field">
@@ -919,18 +1092,18 @@ input[type="date"].bb-input::-webkit-calendar-picker-indicator { opacity: 0.55; 
 <section class="bb-step" aria-label="THE PRACTICALS">
 <header class="bb-step-head"><span class="bb-step-marker"><span class="num">03</span> — THE PRACTICALS</span></header>
 <div class="bb-field" data-error="We’ll need to know who’s writing.">
-<label class="bb-label" for="f_7">Your names <span class="bb-req" aria-hidden="true">*</span></label>
-<input class="bb-input" id="f_7" name="names" type="text" required placeholder="Hannah &amp; Angus" autocomplete="name" data-error="We’ll need to know who’s writing.">
+<label class="bb-label" for="f_10">Your names <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_10" name="names" type="text" required placeholder="Hannah &amp; Angus" autocomplete="name" data-error="We’ll need to know who’s writing.">
 </div>
 
 <div class="bb-field" data-error="We’ll need an email to reply to you.">
-<label class="bb-label" for="f_8">Email <span class="bb-req" aria-hidden="true">*</span></label>
-<input class="bb-input" id="f_8" name="email" type="email" required autocomplete="email" data-error="We’ll need an email to reply to you." data-error-format="That email doesn’t look quite right.">
+<label class="bb-label" for="f_11">Email <span class="bb-req" aria-hidden="true">*</span></label>
+<input class="bb-input" id="f_11" name="email" type="email" required autocomplete="email" data-error="We’ll need an email to reply to you." data-error-format="That email doesn’t look quite right.">
 </div>
 
 <div class="bb-field">
-<label class="bb-label" for="f_9">Phone (optional)</label>
-<input class="bb-input" id="f_9" name="phone" type="tel" autocomplete="tel">
+<label class="bb-label" for="f_12">Phone (optional)</label>
+<input class="bb-input" id="f_12" name="phone" type="tel" autocomplete="tel">
 </div>
 
 <fieldset class="bb-field">
@@ -1028,6 +1201,39 @@ input[type="date"].bb-input::-webkit-calendar-picker-indicator { opacity: 0.55; 
     var value = params.get(input.getAttribute("data-capture-param"));
     if (value) input.value = value;
   });
+
+  /* ---------- Assiette: category filters + claim → reserve ---------- */
+
+  var shopGrid = document.querySelector(".bb-shop-grid");
+  if (shopGrid) {
+    var filterBox = document.querySelector(".bb-shop-filters");
+    if (filterBox) {
+      filterBox.addEventListener("click", function (e) {
+        var btn = e.target.closest("button");
+        if (!btn) return;
+        var want = btn.getAttribute("data-filter");
+        filterBox.querySelectorAll("button").forEach(function (b) {
+          b.setAttribute("aria-pressed", String(b === btn));
+        });
+        shopGrid.querySelectorAll(".bb-plate").forEach(function (plate) {
+          plate.classList.toggle("filtered-out",
+            want !== "all" && plate.getAttribute("data-cat") !== want);
+        });
+      });
+    }
+    shopGrid.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-claim]");
+      if (!btn) return;
+      var plateInput = document.querySelector('.bb-form input[name="plate"]');
+      if (!plateInput) return;
+      plateInput.value = btn.getAttribute("data-claim");
+      clearError(plateInput.closest(".bb-field"));
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      plateInput.closest(".bb-form").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+      var nameInput = document.querySelector('.bb-form input[name="names"]');
+      if (nameInput) nameInput.focus({ preventScroll: true });
+    });
+  }
 
   if (!form) return;
 
